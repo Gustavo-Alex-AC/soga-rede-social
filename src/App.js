@@ -1,4 +1,5 @@
 import Exemplo from "./componentes/Exemplo/Exemplo";
+import Login from "./paginas/login/Login";
 
 function App() {
   // Esse é o componente principal do aplicativo. As paginas,componentes e estrutura principais serem colocadas aqui.
@@ -9,6 +10,7 @@ function App() {
   return (
     <div>
       <Exemplo />
+      <Login />
     </div>
   );
 }
