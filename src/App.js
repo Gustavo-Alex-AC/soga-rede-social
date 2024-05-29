@@ -1,18 +1,35 @@
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Exemplo from "./componentes/Exemplo/Exemplo";
 import Login from "./paginas/login/Login";
+import Registrar from "./paginas/registrar/Registrar";
+import Home from "./paginas/home/Home.jsx";
+import Perfil from "./paginas/perfil/Perfil.jsx";
+import AppLayout from "./ui/AppLayout";
+import Erro from "./ui/Erro";
 
 function App() {
-  // Esse é o componente principal do aplicativo. As paginas,componentes e estrutura principais serem colocadas aqui.
-  //Depois vamos entender melhor
-  // Aqui é para estado e javascript
+  const router = createBrowserRouter([
+    { path: "/", element: <Exemplo /> },
+    {
+      element: <AppLayout />,
+      errorElement: <Erro />,
 
-  // Aqui no return é onde se coloca a estrutura(componentes, paginas), o html e as classes do css ou até inline style
-  return (
-    <div>
-      <Exemplo />
-      <Login />
-    </div>
-  );
+      children: [
+        {
+          path: "/home",
+          element: <Home />,
+        },
+        { path: "/perfil/:userId", element: <Perfil /> },
+      ],
+    },
+    { path: "/login", element: <Login /> },
+    {
+      path: "/registrar",
+      element: <Registrar />,
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
