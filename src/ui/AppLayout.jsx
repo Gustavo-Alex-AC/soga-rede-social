@@ -7,7 +7,12 @@ function AppLayout() {
   return (
     <div>
       <NavBar />
-      <div style={{ display: "flex" }}>
+      <div
+        style={{
+          display: "flex",
+          padding: "0 20px",
+        }}
+      >
         <LeftBar />
         <div style={{ flex: 6 }}>
           <Outlet />

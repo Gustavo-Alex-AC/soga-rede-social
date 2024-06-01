@@ -1,0 +1,42 @@
+/* Light Theme Variables */
+/* :root {
+    --blue: #1e90ff;
+    --white: #ffffff;
+  } */
+
+:theme-light {
+  --textColor: #000;
+  --bg: white;
+  --logo: darkblue;
+  --bgSoft: #f6f3f3;
+  --textColorSoft: #555;
+  --border: lightgray;
+  --color-grey-50: #f9fafb;
+}
+
+/* Dark Theme Variables */
+:theme-dark {
+  --textColor: whitesmoke;
+  --bg: #222;
+  --logo: white;
+  --bgSoft: #333;
+  --textColorSoft: lightgray;
+  --border: #444;
+}
+
+.home {
+  padding: 20px 70px;
+  background-color: #f9fafb;
+}
+
+@media (max-width: 480px) {
+  .home {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 960px) {
+  .home {
+    padding: 20px;
+  }
+}
