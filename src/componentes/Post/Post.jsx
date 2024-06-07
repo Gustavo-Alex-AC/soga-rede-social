@@ -5,6 +5,7 @@ import { FaRegComments } from "react-icons/fa6";
 import { MdOutlineMoreHoriz } from "react-icons/md";
 import { RiShareForwardLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import Comentario from "../comentários/Comentario";
 
 function Post({ post }) {
   const [commentOpen, setCommentOpen] = useState(false);
@@ -51,7 +52,7 @@ function Post({ post }) {
             Share
           </div>
         </div>
-        {/* {commentOpen && <Comments />} */}
+        {commentOpen && <Comentario />}
       </div>
     </div>
   );
