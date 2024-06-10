@@ -1,0 +1,152 @@
+
+
+.main{
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+/* Estiização da div principal, conteinera*/
+
+.conteinera {
+  display: grid;
+  grid-template-columns: 60fr 40fr;
+  height: 100vh;
+
+}
+
+.conteiner {
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+
+/* div registrar, reduzir o cumprimento dos imput e botão*/
+.registerForm{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Definição  do tamanho e posição do texto registrar*/
+.registerForm h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
+
+.registerForm label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.registerForm input {
+  width: 120%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid hwb(0 17% 83%);
+  border-radius: 4px;
+  background-color: hsl(36, 56%, 98%);
+  
+
+}
+
+.registerForm button {
+  width: 100%;
+  padding: 10px;
+  background-color: #444141;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  border-radius: 15px;
+  
+  
+  }
+
+  
+
+.registerForm button:hover {
+  background-color: #787878;
+}
+
+#botao {
+  padding: 1rem 4rem;
+}
+
+.btn button {
+  width: 50%;
+  padding: 9px;
+  background: blue;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid white;
+  }
+
+  #botao{
+
+    margin-left: 7%;
+    margin-top: 25%;
+    font-size: 15px;
+    }
+
+   
+    .login {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: blue;
+    } 
+
+    /* atribuição do tamanho da letra  e cores*/
+.loginForm h1{
+
+  font-size: 75px;
+  color: aliceblue;
+ }
+
+.loginForm h3{
+
+color: aliceblue;
+}
+
+.loginForm{
+
+padding-bottom: 15%;
+}
+
+   
+    #bota{
+
+      margin-left: 25%;
+      margin-top: 25%;
+      font-size: 15px;
+      }
+
+    #bota:hover{
+
+      background-color: #f7f7fa;
+      color: blue;
+      
+    }
+
+  .btn label{
+
+    
+font-size: small;
+color: white;
+
+
+}
+
+
+
