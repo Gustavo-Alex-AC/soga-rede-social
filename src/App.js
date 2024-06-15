@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Exemplo from "./componentes/Exemplo/Exemplo";
+import Mensagem from "./componentes/mensagem/Mensagem";
 import Login from "./paginas/login/Login";
 import Registrar from "./paginas/registrar/Registrar";
 import Home from "./paginas/home/Home.jsx";
@@ -27,6 +28,7 @@ function App() {
       path: "/registrar",
       element: <Registrar />,
     },
+    { path: "/mensagem", element: <Mensagem /> },
   ]);
 
   return <RouterProvider router={router} />;
