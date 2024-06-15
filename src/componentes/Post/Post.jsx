@@ -7,7 +7,7 @@ import { RiShareForwardLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import Comentario from "../comentários/Comentario";
 
-function Post({ post }) {
+function Post({ post, userData }) {
   const [commentOpen, setCommentOpen] = useState(false);
 
   //TEMPORARY
@@ -18,13 +18,13 @@ function Post({ post }) {
       <div className={style.container}>
         <div className={style.user}>
           <div className={style.userInfo}>
-            <img src={post.profilePic} alt="" />
+            <img src={userData?.profile_picture} alt="" />
             <div className={style.details}>
               <Link
                 to={`/profile/${post.userId}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <span className={style.name}>{post.name}</span>
+                <span className={style.name}>{userData?.nome}</span>
               </Link>
               <span className={style.date}>1 min ago</span>
             </div>
@@ -32,8 +32,22 @@ function Post({ post }) {
           <MdOutlineMoreHoriz size={22} />
         </div>
         <div className={style.content}>
-          <p>{post.desc}</p>
-          <img src={post.img} alt="" />
+          <p>{post.content}</p>
+
+          {post.mediaUrl &&
+            (post.mediaUrl.endsWith(".mp4") ? (
+              <video controls>
+                <source
+                  src={`http://localhost:3000/uploads/${post.mediaUrl}`}
+                  type="video/mp4"
+                />
+              </video>
+            ) : (
+              <img
+                src={`http://localhost:3000/uploads/${post.mediaUrl}`}
+                alt="media"
+              />
+            ))}
         </div>
         <div className={style.info}>
           <div className={style.item}>
@@ -52,7 +66,7 @@ function Post({ post }) {
             Share
           </div>
         </div>
-        {commentOpen && <Comentario />}
+        {commentOpen && <Comentario post={post} />}
       </div>
     </div>
   );

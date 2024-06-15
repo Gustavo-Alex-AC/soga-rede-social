@@ -1,74 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
 import { FaEdit, FaCamera } from "react-icons/fa";
-import { fetchUser } from "../../services/userData";
-import { toast } from "react-toastify";
 import style from "./Perfil.module.css";
 import Posts from "../../componentes/posts/Posts";
-import Erro from "../../ui/Erro";
-import UserDataContext from "../../context/UserDataContext";
-import { fetchUserPosts } from "../../services/postData";
 
 function Perfil() {
-  const [name, setName] = useState("");
-  const [profilePic, setProfilePic] = useState("");
-  const [bio, setBio] = useState("");
-  const [interests, setInterests] = useState("");
-  const { setUserData } = useContext(UserDataContext);
-  const { userId } = useParams(); // Capture userId from URL
-
-  // Load user data by ID
-  const {
-    isLoading: isLoadingUserData,
-    data: userData,
-    isError: isErrorUserData,
-  } = useQuery({
-    queryKey: ["users", userId],
-    queryFn: () => fetchUser(userId),
-    onError: (error) => {
-      toast.error(`Error fetching user: ${error.message}`);
-      console.error("Error details:", error);
-    },
-    onSuccess: (data) => {
-      toast.success("User data fetched successfully!");
-    },
-  });
-
-  setUserData(userData);
-
-  // Load posts by user ID
-  const {
-    isLoading: isLoadingPosts,
-    data: postsData,
-    isError: isErrorPosts,
-  } = useQuery({
-    queryKey: ["posts", userId],
-    queryFn: () => fetchUserPosts(userId),
-    onError: (error) => {
-      toast.error(`Error fetching Posts data: ${error.message}`);
-      console.error("Error details:", error);
-    },
-    onSuccess: () => {
-      toast.success("Posts fetched successfully!");
-    },
-  });
-
-  // ordenando os posts por ordem de chegada
-  const sortedPosts = postsData?.sort(
-    (a, b) => new Date(b.id) - new Date(a.id)
+  const [name, setName] = useState("Paula Alex");
+  const [profilePic, setProfilePic] = useState(
+    "https://a.storyblok.com/f/191576/1200x800/215e59568f/round_profil_picture_after_.webp"
   );
-
-  // Combine posts with user data
-  const postsWithUserData = sortedPosts?.map((post) => ({
-    ...post,
-    user: userData,
-  }));
-
-  // Handle profile picture change
-  const handleProfilePicChange = (e) => {
-    setProfilePic(URL.createObjectURL(e.target.files[0]));
-  };
+  const [bio, setBio] = useState("This is the bio.");
+  const [interests, setInterests] = useState("Reading, Travelling, Coding");
 
   const [isEditing, setIsEditing] = useState({
     name: false,
@@ -76,19 +17,10 @@ function Perfil() {
     interests: false,
   });
 
-  // Toggle edit mode for fields
-  const toggleEdit = (field) => {
-    setIsEditing((prev) => ({ ...prev, [field]: !prev[field] }));
-  };
-
-  // Handling the returns
-  if (isLoadingUserData || isLoadingPosts) {
-    return <div>Loading...</div>;
-  }
-
-  if (isErrorUserData || isErrorPosts) {
-    return <Erro />;
-  }
+  const handleProfilePicChange = (e) =>
+    setProfilePic(URL.createObjectURL(e.target.files[0]));
+  const toggleEdit = (field) =>
+    setIsEditing({ ...isEditing, [field]: !isEditing[field] });
 
   return (
     <div className={style.profile}>
@@ -99,15 +31,10 @@ function Perfil() {
           className={style.cover}
         />
         <div className={style.profilePicContainer}>
-          <img
-            src={userData?.profile_picture}
-            alt="Profile"
-            className={style.profilePic}
-          />
+          <img src={profilePic} alt="Profile" className={style.profilePic} />
           <FaCamera
             onClick={() => document.getElementById("profilePicInput").click()}
             className={style.editProfilePicIcon}
-            size={25}
           />
           <input
             type="file"
@@ -129,7 +56,7 @@ function Perfil() {
                 className={style.nameInput}
               />
             ) : (
-              <span className={style.name}>{userData?.nome}</span>
+              <span className={style.name}>{name}</span>
             )}
             <FaEdit
               onClick={() => toggleEdit("name")}
@@ -155,7 +82,7 @@ function Perfil() {
                       className={style.bioInput}
                     ></textarea>
                   ) : (
-                    <p className={style.bio}>{userData?.bio}</p>
+                    <p className={style.bio}>{bio}</p>
                   )}
                 </div>
               </div>
@@ -178,7 +105,7 @@ function Perfil() {
                       className={style.interestsInput}
                     ></textarea>
                   ) : (
-                    <p className={style.interests}>{userData?.interests}</p>
+                    <p className={style.interests}>{interests}</p>
                   )}
                 </div>
               </div>
@@ -186,8 +113,9 @@ function Perfil() {
           </div>
           <button className={style.friendButton}>Pedir amizade</button>
         </div>
+
         {/* Mostrar todos os posts */}
-        <Posts posts={postsWithUserData} />
+        <Posts />
       </div>
     </div>
   );

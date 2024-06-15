@@ -3,18 +3,19 @@ import style from "./LeftBar.module.css";
 import { FaRegNewspaper } from "react-icons/fa6";
 import { MdOutlineEventNote, MdOutlineGroups } from "react-icons/md";
 import { IoNotificationsOutline, IoSettingsOutline } from "react-icons/io5";
+import { useContext } from "react";
+import UserDataContext from "../../context/UserDataContext";
 
 function LeftBar() {
+  const { userData } = useContext(UserDataContext);
+
   return (
     <div className={style.leftBar}>
       <div className={style.continer}>
         <div className={style.menu}>
           <div className={style.user}>
-            <img
-              src="https://a.storyblok.com/f/191576/1200x800/215e59568f/round_profil_picture_after_.webp"
-              alt="user"
-            />
-            <span>Paula alex</span>
+            <img src={userData?.profile_picture} alt="user" />
+            <span>{userData?.nome}</span>
           </div>
           <div className={style.item}>
             <LiaUserFriendsSolid size={30} />
