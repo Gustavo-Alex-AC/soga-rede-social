@@ -13,6 +13,13 @@ import { GlobalProvider } from "./context/GlobalContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { UserDataProvider } from "./context/UserDataContext.js";
+import Mensagem from "./componentes/mensagem/Mensagem.jsx";
+import Amizades from "./componentes/amizades/Amizades.jsx";
+import Club from "./componentes/clubs/Club.jsx";
+import Definicoes from "./componentes/definicoes/Definicoes.jsx";
+import Evento from "./componentes/eventos/Evento.jsx";
+import Notificacao from "./componentes/notificacao/Notificacao.jsx";
+import Noticias from "./componentes/noticias/Noticias.jsx";
 
 //setting up react query
 const queryClient = new QueryClient({
@@ -44,6 +51,62 @@ function App() {
           element: (
             <RotaProtegida>
               <Perfil />
+            </RotaProtegida>
+          ),
+        },
+        {
+          path: "/mensagem",
+          element: (
+            <RotaProtegida>
+              <Mensagem />
+            </RotaProtegida>
+          ),
+        },
+        {
+          path: "/amizades",
+          element: (
+            <RotaProtegida>
+              <Amizades />
+            </RotaProtegida>
+          ),
+        },
+        {
+          path: "/grupos",
+          element: (
+            <RotaProtegida>
+              <Club />
+            </RotaProtegida>
+          ),
+        },
+        {
+          path: "/definicoes",
+          element: (
+            <RotaProtegida>
+              <Definicoes />
+            </RotaProtegida>
+          ),
+        },
+        {
+          path: "/eventos",
+          element: (
+            <RotaProtegida>
+              <Evento />
+            </RotaProtegida>
+          ),
+        },
+        {
+          path: "/notificacao",
+          element: (
+            <RotaProtegida>
+              <Notificacao />
+            </RotaProtegida>
+          ),
+        },
+        {
+          path: "/noticias",
+          element: (
+            <RotaProtegida>
+              <Noticias />
             </RotaProtegida>
           ),
         },

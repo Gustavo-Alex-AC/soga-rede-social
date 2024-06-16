@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import style from "./Post.module.css";
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 import { FaRegComments } from "react-icons/fa6";
@@ -6,12 +6,73 @@ import { MdOutlineMoreHoriz } from "react-icons/md";
 import { RiShareForwardLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import Comentario from "../comentários/Comentario";
+import {
+  fetchComentariosCount,
+  fetchComentariosPostId,
+} from "../../services/comentarioData";
+import { toast } from "react-toastify";
+import { useQuery } from "@tanstack/react-query";
+import {
+  createLike,
+  deleteLike,
+  fetchLikesCountByPostId,
+  isPostLikedByUser,
+} from "../../services/curtidaData";
+import ReactTimeAgo from "react-time-ago";
+import GlobalContext from "../../context/GlobalContext";
 
 function Post({ post, userData }) {
+  const { user } = useContext(GlobalContext);
+  const [commentsCount, setCommentsCount] = useState(0);
   const [commentOpen, setCommentOpen] = useState(false);
+  const [likesCount, setLikesCount] = useState(0);
+  const [liked, setLiked] = useState(false); // Assuming you track whether the user has liked the post
 
-  //TEMPORARY
-  const liked = false;
+  // Fetching comments for the specific post
+  const {
+    isLoading,
+    data: comentarios,
+    isError,
+  } = useQuery({
+    queryKey: ["comentarios", post.id], // Dynamic query key with post.id
+    queryFn: () => fetchComentariosPostId(post.id), // Pass post.id to fetchComentarios
+    onError: (error) => {
+      toast.error(`Error fetching comments: ${error.message}`);
+      console.error("Error details:", error);
+    },
+    onSuccess: (comentarios) => {
+      toast.success("Comments fetched successfully!");
+      setCommentsCount(comentarios.length);
+    },
+  });
+
+  useEffect(() => {
+    // Fetch comments count when the component mounts
+    fetchComentariosCount(post.id).then(setCommentsCount);
+  }, [post.id, setCommentsCount]);
+
+  // criar, carregar e eliminar likes
+  useEffect(() => {
+    const loadLikesCount = async () => {
+      const count = await fetchLikesCountByPostId(post.id);
+      setLikesCount(count);
+      const likedStatus = await isPostLikedByUser(user.id, post.id);
+      setLiked(likedStatus);
+    };
+
+    loadLikesCount();
+  }, [post.id, user.id]);
+
+  const handleLike = async () => {
+    if (liked) {
+      await deleteLike({ user_id: user.id, post_id: post.id });
+      setLikesCount(likesCount - 1);
+    } else {
+      await createLike({ user_id: user.id, post_id: post.id });
+      setLikesCount(likesCount + 1);
+    }
+    setLiked(!liked);
+  };
 
   return (
     <div className={style.post}>
@@ -26,7 +87,9 @@ function Post({ post, userData }) {
               >
                 <span className={style.name}>{userData?.nome}</span>
               </Link>
-              <span className={style.date}>1 min ago</span>
+              <span className={style.date}>
+                <ReactTimeAgo date={post.created_at} locale="pt-PT" />
+              </span>
             </div>
           </div>
           <MdOutlineMoreHoriz size={22} />
@@ -50,23 +113,31 @@ function Post({ post, userData }) {
             ))}
         </div>
         <div className={style.info}>
-          <div className={style.item}>
-            {liked ? <AiOutlineLike size={22} /> : <AiFillLike size={22} />}
-            12 Likes
+          <div className={style.item} onClick={handleLike}>
+            {liked ? <AiFillLike size={22} /> : <AiOutlineLike size={22} />}
+            {likesCount} Likes
           </div>
           <div
             className={style.item}
             onClick={() => setCommentOpen(!commentOpen)}
           >
             <FaRegComments size={22} />
-            12 Comments
+            {commentsCount} Comentários
           </div>
           <div className={style.item}>
             <RiShareForwardLine size={22} />
             Share
           </div>
         </div>
-        {commentOpen && <Comentario post={post} />}
+        {commentOpen && (
+          <Comentario
+            post={post}
+            setCommentsCount={setCommentsCount}
+            comentarios={comentarios}
+            isLoading={isLoading}
+            isError={isError}
+          />
+        )}
       </div>
     </div>
   );

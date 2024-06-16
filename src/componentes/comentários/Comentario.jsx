@@ -2,32 +2,21 @@ import { useContext, useState } from "react";
 import style from "./Comentario.module.css";
 import axios from "axios";
 import UserDataContext from "../../context/UserDataContext";
-import { useQueryClient, useQuery } from "@tanstack/react-query";
-import { toast } from "react-toastify";
-import { fetchComentariosPostId } from "../../services/comentarioData";
+import { useQueryClient } from "@tanstack/react-query";
+
+import { fetchComentariosCount } from "../../services/comentarioData";
 import ReactTimeAgo from "react-time-ago";
 
-function Comentario({ post }) {
+function Comentario({
+  post,
+  setCommentsCount,
+  comentarios,
+  isError,
+  isLoading,
+}) {
   const { userData } = useContext(UserDataContext);
   const [content, setContent] = useState("");
   const queryClient = useQueryClient();
-
-  // Fetching comments for the specific post
-  const {
-    isLoading,
-    data: comentarios,
-    isError,
-  } = useQuery({
-    queryKey: ["comentarios", post.id], // Dynamic query key with post.id
-    queryFn: () => fetchComentariosPostId(post.id), // Pass post.id to fetchComentarios
-    onError: (error) => {
-      toast.error(`Error fetching comments: ${error.message}`);
-      console.error("Error details:", error);
-    },
-    onSuccess: () => {
-      toast.success("Comments fetched successfully!");
-    },
-  });
 
   const handleContentChange = (e) => setContent(e.target.value);
 
@@ -60,6 +49,7 @@ function Comentario({ post }) {
       console.log("Comentario created successfully:", response.data);
       queryClient.invalidateQueries(["comentarios", post.id]); // Invalidate the specific comments query
       setContent("");
+      fetchComentariosCount(post.id).then(setCommentsCount); // Update the comments count after a new comment is added
     } catch (error) {
       if (error.response) {
         console.error("Error creating comentarios:", error.response.data);
@@ -91,18 +81,22 @@ function Comentario({ post }) {
         />
         <button onClick={handleSubmit}>Enviar</button>
       </div>
-      {comentarios?.map((comentario) => (
-        <div className={style.comment} key={comentario.id}>
-          <img src={comentario.User.profile_picture} alt="" />
-          <div className={style.info}>
-            <span>{comentario.User.nome}</span>
-            <p>{comentario.content}</p>
+      {comentarios?.length ? (
+        comentarios.map((comentario) => (
+          <div className={style.comment} key={comentario.id}>
+            <img src={comentario.User?.profile_picture} alt="" />
+            <div className={style.info}>
+              <span>{comentario.User?.nome}</span>
+              <p>{comentario.content}</p>
+            </div>
+            <span className={style.date}>
+              <ReactTimeAgo date={comentario.created_at} locale="pt-PT" />
+            </span>
           </div>
-          <span className={style.date}>
-            <ReactTimeAgo date={comentario.created_at} locale="pt-PT" />
-          </span>
-        </div>
-      ))}
+        ))
+      ) : (
+        <div>Sem comentários ainda.</div>
+      )}
     </div>
   );
 }

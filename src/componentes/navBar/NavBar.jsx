@@ -1,4 +1,4 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import style from "./Navbar.module.css";
 
 import { ImSearch } from "react-icons/im";
@@ -13,11 +13,15 @@ import GlobalContext from "../../context/GlobalContext";
 
 function NavBar() {
   const { userData } = useContext(UserDataContext);
-  const { setUser } = useContext(GlobalContext);
+  const { user, setUser } = useContext(GlobalContext);
+  const navigate = useNavigate();
 
-  function handleLogOut() {
-    Navigate("/login");
-    setUser(null);
+  function logout() {
+    if (user) {
+      setUser(null);
+      navigate("/login");
+    }
+    // console.log("Logout...:", user);
   }
 
   return (
@@ -39,21 +43,30 @@ function NavBar() {
       </div>
 
       <div className={style.middle}>
-        <AiOutlineHome size={25} />
-        <FaRegUser size={25} />
-        <IoNotificationsOutline size={25} />
-        <FaRegMessage size={25} />
+        <NavLink to={"/home"}>
+          <AiOutlineHome size={25} />
+        </NavLink>
+        <NavLink to={`/perfil/${user.id}`}>
+          <FaRegUser size={25} />
+        </NavLink>
+        <NavLink to={`/notificacao`}>
+          <IoNotificationsOutline size={25} />
+        </NavLink>
+        <NavLink to={`/mensagem`}>
+          <FaRegMessage size={25} />
+        </NavLink>
       </div>
 
       <div className={style.right}>
         <div className={style.user}>
-          <img src={userData?.profile_picture} alt="user" />
-          {/* <span>Paula Alex</span> */}
+          <NavLink to={`/perfil/${user.id}`}>
+            <img src={userData?.profile_picture} alt="user" />
+          </NavLink>
         </div>
 
         <IoMoonOutline size={25} />
-        {/* <IoMoonSharp /> */}
-        <PiSignOutLight size={25} onClick={() => handleLogOut} />
+
+        <PiSignOutLight size={25} onClick={logout} />
       </div>
     </div>
   );

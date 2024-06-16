@@ -5,6 +5,7 @@ const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [totalPosts, setTotalPosts] = useState(0);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -15,7 +16,9 @@ export const GlobalProvider = ({ children }) => {
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ user, setUser }}>
+    <GlobalContext.Provider
+      value={{ user, setUser, totalPosts, setTotalPosts }}
+    >
       {children}
     </GlobalContext.Provider>
   );
