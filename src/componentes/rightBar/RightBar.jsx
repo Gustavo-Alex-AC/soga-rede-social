@@ -1,3 +1,4 @@
+import Pedidos from "../amizades/Pedidos";
 import style from "./RightBar.module.css";
 
 function RightBar() {
@@ -6,45 +7,7 @@ function RightBar() {
       <div className={style.container}>
         <div className={style.item}>
           <span>Pedidos de amizades</span>
-          <div className={style.user}>
-            <div className={style.userInfo}>
-              <img
-                src="https://static.vecteezy.com/system/resources/thumbnails/006/859/348/small/young-boy-indian-student-portrait-photo.jpg"
-                alt=""
-              />
-              <span>Walter Santos</span>
-            </div>
-            <div className={style.buttons}>
-              <button>Confirmar</button>
-              <button>Eliminar</button>
-            </div>
-          </div>
-          <div className={style.user}>
-            <div className={style.userInfo}>
-              <img
-                src="https://www.goldmansachs.com/our-commitments/sustainability/one-million-black-women/impact-grants/multimedia/masthead.jpg"
-                alt=""
-              />
-              <span>Fernanda Chituta</span>
-            </div>
-            <div className={style.buttons}>
-              <button>Confirmar</button>
-              <button>Eliminar</button>
-            </div>
-          </div>
-          <div className={style.user}>
-            <div className={style.userInfo}>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/8/86/Woman_at_Lover%27s_Bridge_Tanjung_Sepat_%28cropped%29.jpg"
-                alt=""
-              />
-              <span>Makanaka Pearl</span>
-            </div>
-            <div className={style.buttons}>
-              <button>Confirmar</button>
-              <button>Eliminar</button>
-            </div>
-          </div>
+          <Pedidos />
         </div>
 
         <div className={style.item}>

@@ -70,6 +70,10 @@
   cursor: pointer;
 }
 
+.middle a {
+  color: #000;
+}
+
 .right {
   display: flex;
   align-items: center;

@@ -16,7 +16,7 @@ function LeftBar() {
     <div className={style.leftBar}>
       <div className={style.continer}>
         <div className={style.menu}>
-          <Link to={`/perfil/${user.id}`}>
+          <Link to={`/perfil/${user?.id}`}>
             <div className={style.user}>
               <img src={userData?.profile_picture} alt="user" />
               <span>{userData?.nome}</span>

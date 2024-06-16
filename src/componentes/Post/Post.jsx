@@ -33,6 +33,7 @@ function Post({ post, userData }) {
     isLoading,
     data: comentarios,
     isError,
+    error,
   } = useQuery({
     queryKey: ["comentarios", post.id], // Dynamic query key with post.id
     queryFn: () => fetchComentariosPostId(post.id), // Pass post.id to fetchComentarios
@@ -136,6 +137,7 @@ function Post({ post, userData }) {
             comentarios={comentarios}
             isLoading={isLoading}
             isError={isError}
+            error={error}
           />
         )}
       </div>

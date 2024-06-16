@@ -7,6 +7,8 @@ import GlobalContext from "../../context/GlobalContext";
 import useUserData from "../../hooks/useUserData";
 import { usePosts } from "../../hooks/usePosts";
 import { fetchPosts } from "../../services/postData";
+import Spinner from "../../ui/Spinner";
+import Erro from "../../ui/Erro";
 
 function Home() {
   const {
@@ -54,13 +56,16 @@ function Home() {
 
   // handling user the returns
   if (isLoadingUsersData || isLoadingPosts) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   if (isErrorUsersData || isErrorPosts) {
     return (
       <div>
-        Error loading data: {errorUserData.message || errorPosts.message}
+        Error loading data:{" "}
+        {<Erro mensagem={errorUserData?.message} /> || (
+          <Erro mensagem={errorPosts?.message} />
+        )}
       </div>
     );
   }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { FaEdit, FaCamera } from "react-icons/fa";
@@ -6,11 +6,14 @@ import { fetchUser } from "../../services/userData";
 import { toast } from "react-toastify";
 import style from "./Perfil.module.css";
 import Posts from "../../componentes/posts/Posts";
-import Erro from "../../ui/Erro";
 import UserDataContext from "../../context/UserDataContext";
 import { fetchUserPosts } from "../../services/postData";
+import Erro from "../../ui/Erro";
+import Spinner from "../../ui/Spinner";
+import GlobalContext from "../../context/GlobalContext";
 
 function Perfil() {
+  const { user } = useContext(GlobalContext);
   const [name, setName] = useState("");
   const [profilePic, setProfilePic] = useState("");
   const [bio, setBio] = useState("");
@@ -23,6 +26,7 @@ function Perfil() {
     isLoading: isLoadingUserData,
     data: userData,
     isError: isErrorUserData,
+    error: errorUserData,
   } = useQuery({
     queryKey: ["users", userId],
     queryFn: () => fetchUser(userId),
@@ -42,6 +46,7 @@ function Perfil() {
     isLoading: isLoadingPosts,
     data: postsData,
     isError: isErrorPosts,
+    error: errorPosts,
   } = useQuery({
     queryKey: ["posts", userId],
     queryFn: () => fetchUserPosts(userId),
@@ -83,11 +88,15 @@ function Perfil() {
 
   // Handling the returns
   if (isLoadingUserData || isLoadingPosts) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   if (isErrorUserData || isErrorPosts) {
-    return <Erro />;
+    return (
+      <Erro mensagem={errorUserData.message} /> || (
+        <Erro mensagem={errorPosts.message} />
+      )
+    );
   }
 
   return (
@@ -184,9 +193,13 @@ function Perfil() {
               </div>
             </div>
           </div>
-          <button className={style.friendButton}>Pedir amizade</button>
+          {user ? (
+            <button className={style.friendButton}>Atualizar perfil</button>
+          ) : (
+            <button className={style.friendButton}>Pedir amizade</button>
+          )}
         </div>
-        {/* Mostrar todos os posts */}
+
         <Posts posts={postsWithUserData} />
       </div>
     </div>

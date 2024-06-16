@@ -6,6 +6,8 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { fetchComentariosCount } from "../../services/comentarioData";
 import ReactTimeAgo from "react-time-ago";
+import Spinner from "../../ui/Spinner";
+import Erro from "../../ui/Erro";
 
 function Comentario({
   post,
@@ -13,6 +15,7 @@ function Comentario({
   comentarios,
   isError,
   isLoading,
+  error,
 }) {
   const { userData } = useContext(UserDataContext);
   const [content, setContent] = useState("");
@@ -60,14 +63,12 @@ function Comentario({
   };
 
   if (isLoading) {
-    return <div>Loading comments...</div>;
+    return <Spinner />;
   }
 
   if (isError) {
-    return <div>Error loading comments</div>;
+    return <Erro mensagem={error.message} />;
   }
-
-  console.log("comentarios: ", comentarios);
 
   return (
     <div className={style.comments}>
@@ -95,7 +96,7 @@ function Comentario({
           </div>
         ))
       ) : (
-        <div>Sem comentários ainda.</div>
+        <div style={{ textAlign: "center" }}>Sem comentários ainda.</div>
       )}
     </div>
   );

@@ -44,9 +44,9 @@ function NavBar() {
 
       <div className={style.middle}>
         <NavLink to={"/home"}>
-          <AiOutlineHome size={25} />
+          <AiOutlineHome size={26} />
         </NavLink>
-        <NavLink to={`/perfil/${user.id}`}>
+        <NavLink to={`/perfil/${user?.id}`}>
           <FaRegUser size={25} />
         </NavLink>
         <NavLink to={`/notificacao`}>
@@ -59,7 +59,7 @@ function NavBar() {
 
       <div className={style.right}>
         <div className={style.user}>
-          <NavLink to={`/perfil/${user.id}`}>
+          <NavLink to={`/perfil/${user?.id}`}>
             <img src={userData?.profile_picture} alt="user" />
           </NavLink>
         </div>
