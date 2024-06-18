@@ -64,7 +64,7 @@ function Compartilhar() {
             />
             <input
               type="text"
-              placeholder={`O que estás a pensar ${userData?.nome}?`}
+              placeholder={`O que estás a pensar, ${userData?.nome}?`}
               value={content}
               onChange={handleContentChange}
             />
