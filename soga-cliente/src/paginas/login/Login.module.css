@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body{
+  font-family: 'Opens Sans' , sans-serif;
+}
+
+.container{
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+background-color: #ecf0f1;
+}
+
+.content{
+  background-color: #fff;
+  border-radius: 15px;
+  width: 960px;
+  height: 60%;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.titulo{
+  font-size: 38px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.descricao{
+  font-size: 14px;
+  font-weight: 300;
+  color: #fff;
+  line-height: 3px;
+  font-size: 10px;
+  padding: 10px 50px;
+}
+
+.btn{
+  border-radius: 15px;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 50px;
+  font-size: 10px;
+  border: none;
+}
+
+.btn-primary{
+  background-color: transparent;
+ border: 1px solid #fff;
+  
+}
+
+.btn-primary:hover{
+  background-color: #fff;
+  color: blue;
+}
+
+.btn-second{
+  background-color: blue;
+  border: blue;
+}
+
+.btn-second:hover{
+  background-color: #fff;
+  border: 1px solid blue;
+  color: blue;
+}
+
+.content::before{
+  content: " ";
+  position: absolute;
+  background-color: rgb(32, 32, 243);
+  width: 45%;
+  height: 100%;
+}
+
+.primeiro-conteudo{
+  display: flex;
+
+}
+.segundo-conteudo{
+  position: absolute;
+  display: none;
+}
+
+.primeira-coluna{
+  text-align: center;
+  flex: 1 0 auto;
+  z-index: 10;
+  font-size: 10px;
+}
+
+.segunda-coluna{
+  flex: 2 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.formulario{
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+}
+
+.formulario input{
+  height: 45px;
+  border: none;
+  background-color: #ecf0f1;
+  margin: 8px;
+
+}

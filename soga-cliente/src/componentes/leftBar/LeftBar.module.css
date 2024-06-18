@@ -1,0 +1,98 @@
+/* Light Theme Variables */
+.theme-light {
+  --textColor: #000;
+  --bg: white;
+  --logo: darkblue;
+  --bgSoft: #f6f3f3;
+  --textColorSoft: #555;
+  --border: lightgray;
+}
+
+/* Dark Theme Variables */
+:theme-dark {
+  --textColor: whitesmoke;
+  --bg: #222;
+  --logo: white;
+  --bgSoft: #333;
+  --textColorSoft: lightgray;
+  --border: #444;
+}
+
+.leftBar {
+  flex: 2;
+  position: sticky;
+  top: 70px;
+  height: calc(100vh - 70px);
+  overflow: scroll;
+  background-color: white;
+  color: #000;
+  margin-top: 20px;
+}
+
+.leftBar::-webkit-scrollbar {
+  display: none;
+}
+
+.container {
+  padding: 20px;
+}
+
+.container hr {
+  margin: 20px 0;
+  border: none;
+  height: 0.5px;
+  background-color: var(--border);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #000;
+}
+
+.menu span {
+  font-size: 12px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user span {
+  font-size: 14px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item img {
+  width: 30px;
+}
+
+.item span {
+  font-size: 14px;
+}
+
+/* Mobile Media Query */
+@media (max-width: 480px) {
+  .leftBar {
+    display: none;
+  }
+}
