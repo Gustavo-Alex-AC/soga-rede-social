@@ -34,7 +34,9 @@ function Contactos() {
           <Contacto contacto={contacto} key={contacto.id} />
         ))
       ) : (
-        <h2>Nenhum Contacto..</h2>
+        <p style={{ textAlign: "center", marginTop: "10px", color: "gray" }}>
+          Nenhum Contacto...
+        </p>
       )}
     </>
   );

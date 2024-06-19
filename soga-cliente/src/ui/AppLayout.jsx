@@ -14,7 +14,9 @@ function AppLayout() {
         }}
       >
         <LeftBar />
-        <div style={{ flex: 6, backgroundColor: "#f9fafb" }}>
+        <div
+          style={{ flex: 6, backgroundColor: "#f9fafb", marginRight: "20px" }}
+        >
           <Outlet />
         </div>
         <RightBar />

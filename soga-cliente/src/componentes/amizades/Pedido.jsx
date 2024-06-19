@@ -11,8 +11,8 @@ function Pedido({ pedido, handleAcceptRequest, handleDeleteRequest }) {
     <>
       <div className={style.user}>
         <div className={style.userInfo}>
-          <img src={pedido?.user.profile_picture} alt="" />
-          <span>{pedido?.user.nome}</span>
+          <img src={pedido?.user?.profile_picture} alt="" />
+          <span>{pedido?.user?.nome}</span>
         </div>
         <div className={style.buttons}>
           <button onClick={handleConfirmar}>Confirmar</button>
