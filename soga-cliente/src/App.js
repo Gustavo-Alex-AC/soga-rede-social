@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Exemplo from "./componentes/exemplo/Exemplo";
+import BoasVindas from "./componentes/boasvindas/BoasVindas.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./paginas/login/Login";
@@ -15,7 +15,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { UserDataProvider } from "./context/UserDataContext.js";
 import Mensagem from "./componentes/mensagem/Mensagem.jsx";
 import Amizades from "./componentes/amizades/Amizades.jsx";
-import Club from "./componentes/clubs/Club.jsx";
+import Grupos from "./componentes/grupos/Grupos.jsx";
 import Definicoes from "./componentes/definicoes/Definicoes.jsx";
 import Evento from "./componentes/eventos/Evento.jsx";
 import Notificacao from "./componentes/notificacao/Notificacao.jsx";
@@ -33,7 +33,7 @@ const queryClient = new QueryClient({
 
 function App() {
   const router = createBrowserRouter([
-    { path: "/", element: <Exemplo /> },
+    { path: "/", element: <BoasVindas /> },
     {
       element: <AppLayout />,
       errorElement: <Erro />,
@@ -74,7 +74,7 @@ function App() {
           path: "/grupos",
           element: (
             <RotaProtegida>
-              <Club />
+              <Grupos />
             </RotaProtegida>
           ),
         },

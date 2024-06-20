@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-//import Exemplo from "./componentes/exemplo/Exemplo.jsx";
+import BoasVindas from "./componentes/boasvindas/BoasVindas.jsx";
 import Login from "./paginas/login/Login.jsx";
 import Registrar from "./paginas/registrar/Registrar.jsx";
 import Home from "./paginas/home/Home.jsx";
@@ -9,7 +9,7 @@ import Erro from "./ui/Erro.jsx";
 
 function App() {
   const router = createBrowserRouter([
-    // { path: "/", element: <Exemplo /> },
+     { path: "/boasvindas", element: <BoasVindas /> },
     {
       element: <AppLayout />,
       errorElement: <Erro />,
