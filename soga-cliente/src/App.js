@@ -20,6 +20,7 @@ import Definicoes from "./componentes/definicoes/Definicoes.jsx";
 import Evento from "./componentes/eventos/Evento.jsx";
 import Notificacao from "./componentes/notificacao/Notificacao.jsx";
 import Noticias from "./componentes/noticias/Noticias.jsx";
+import Photo from "./paginas/insertphoto/Photo.jsx"
 
 //setting up react query
 const queryClient = new QueryClient({
@@ -110,10 +111,19 @@ function App() {
             </RotaProtegida>
           ),
         },
+        {
+          path: "/photo",
+          element: (
+            <RotaProtegida>
+              <Photo />
+            </RotaProtegida>
+          ),
+        },
       ],
     },
     { path: "/login", element: <Login /> },
     { path: "/registrar", element: <Registrar /> },
+    { path: "/photo", element: <Photo /> },
   ]);
 
   return (

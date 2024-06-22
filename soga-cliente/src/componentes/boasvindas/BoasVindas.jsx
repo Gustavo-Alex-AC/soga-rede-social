@@ -1,5 +1,8 @@
 import style from "./BoasVindas.module.css";
 
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 function BoasVindas() {
   // Aqui é para estado e javascript
 
@@ -11,16 +14,25 @@ function BoasVindas() {
       <nav className={style.navigation}>
         <a href="#">Termos e Condições</a>
         <a href="#">Grupos</a>
-        <a href="#">Sore</a>
-        <button className={style.btnEntrar}>Entrar</button>
+        <a href="#">Sobre</a>
       </nav>
+      <Link to="/login">
+          <button className={style.btnEntrar}>Entrar</button>
+        </Link>
     </header>
     <div className={style.welcome}>
-      <h1>Seja Bem-Vindo</h1>
+      <h1>Seja <br /> Bem-Vindo</h1>
       <p>Mantenha-se conectado</p>
-      <p>connosco</p>
-      <button className={style.btnRegistrar}></button>
-      <p>Não tem uma conta?</p>
+      <p>connosco.</p>
+      <div>
+        <div>
+        <Link to="/registrar">
+          <button className={style.btnRegistrar}>Registrar</button>
+        </Link>
+        <br />
+        </div>
+      </div>
+      <h3>Não tem uma conta?</h3>
     </div>
     </body>
   );

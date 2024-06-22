@@ -1,0 +1,71 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+  
+  .body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .wrapper{
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    padding: 60px;
+    
+  }
+  
+  .form{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form h2{
+    margin-bottom: 20px;
+    color: #8d3499;
+    text-align: center;
+    font-size: 30px;
+  }
+  
+  .inputBox{
+  margin-bottom: 15px;
+  }
+  
+  .inputBox label{
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .inputBox input[type="email"], .inputBox input[type="password"], .inputBox input[type="text"]{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+  }
+
+  .btnRegistrar{
+   background-color: #fff;
+   border: 1px solid #8d3499;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 15px;
+    margin-left: 60px;
+    width: 150px;
+    color: #8d3499;
+  }
+  
+  .btnRegistrar:hover{
+    background-color: #8d3499;
+    color:  #fff;
+  }
+  

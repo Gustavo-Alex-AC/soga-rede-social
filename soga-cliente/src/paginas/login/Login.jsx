@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import GlobalContext from "../../context/GlobalContext";
 
+
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -32,26 +33,36 @@ function Login() {
     };
 
     return (
+      <div className={style.body}>
         <div className={style.wrapper}>
         <div className={style.form}>
           <h2>Entrar</h2>
           <form onSubmit={handleSubmit}>
-            <div className={style.inputBox}></div>
+            <div className={style.inputBox}>
+            <label for="email">Email ou número de telefone</label>
             <input
              type="email"
-             value={email}onChange={(e) => setEmail(e.target.value)}
-             placeholder="Email ou numero de telefone" />
+             value={email}
+             onChange={(e) => setEmail(e.target.value)}
+             id="email" name="email" required/>
+             </div>
+          
+              <div className={style.inputBox}>
+            <label for="password">Digite sua senha</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Digite sua senha"/>
+              id="password" name="password" required/>
+              </div>
+              
             <div className={style.remember}>
                 <label><input type="checkbox" />Lembrar de mim</label>
                 <a href="#">Esqueceu a palavra-passe?</a>
             </div>
             <button className={style.btnEntrar} type="submit">Entrar</button>
           </form>
+        </div>
         </div>
         </div>
 

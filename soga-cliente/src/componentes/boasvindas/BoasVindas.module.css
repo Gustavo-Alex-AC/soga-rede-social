@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url(imagens/img01.jpg) no-repeat;
+  background: url(imagens/img02.jpg) no-repeat;
   background-size: cover;
   background-position: center;
 }
@@ -21,7 +21,6 @@
   left: 0;
   width: 100%;
   padding: 20px 100px;
-  background-color: blue;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,6 +50,7 @@
   left: 0;
   bottom: -6px;
   width: 100%;
+  height: 3px;
   background: #fff;
   border-radius: 5px;
   transform-origin: right;
@@ -74,8 +74,27 @@
   font-size: 1.1em;
   color: #fff;
   font-weight: 500;
-  margin-left:40px ;
+  margin-left:100px ;
   transition: .5s;
+}
+
+.btnEntrar{
+  width: 130px;
+  height: 50px;
+  background: transparent;
+  outline: none;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1em;
+  color: #fff;
+  margin-right: 40px;
+  transition: .5s;
+}
+
+.btnEntrar:hover{
+  background: #fff;
+  color: #162938;
 }
 
 .navigation .btnEntrar:hover{
@@ -94,11 +113,29 @@
   font-size: 1.1em;
   color: #fff;
   font-weight: 500;
-  margin-left:40px ;
+  margin-left:130px ;
   transition: .5s;
+  margin-top: 40px;
 }
 
 .btnRegistrar:hover{
   background: #fff;
   color: #162938;
+}
+
+.welcome h1{
+  font-size: 4.5rem;
+  color: #fff;
+}
+
+.welcome p{
+  color: #fff;
+  font-size: 2rem;
+}
+
+.welcome h3{
+  font-size: 15px;
+  color: #fff;
+  margin-left: 120px;
+  margin-top: 10px;
 }
