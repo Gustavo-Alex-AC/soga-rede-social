@@ -44,36 +44,15 @@
 }
 
 .inputBox input[type="email"],
-.inputBox input[type="password"] {
+.inputBox input[type="password"],
+.inputBox input[type="text"] {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 15px;
 }
 
-.remember {
-  display: flex;
-  align-items: center;
-  font-size: 12px;
-}
-
-.remember input {
-  margin-right: 1px;
-}
-
-#password {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #0066cc;
-  text-decoration: none;
-  align-self: flex-end;
-}
-
-#password:hover {
-  text-decoration-line: underline;
-}
-
-.btnEntrar {
+.btnRegistrar {
   background-color: #fff;
   border: 1px solid darkblue;
   padding: 12px;
@@ -86,7 +65,7 @@
   color: darkblue;
 }
 
-.btnEntrar:hover {
+.btnRegistrar:hover {
   background-color: darkblue;
   color: #fff;
 }

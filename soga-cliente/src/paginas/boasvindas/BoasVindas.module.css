@@ -1,34 +1,34 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
-.body{
+.body {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url(imagens/img01.jpg) no-repeat;
+  background: url(imagens/img02.jpg) no-repeat;
   background-size: cover;
   background-position: center;
 }
 
-.header{
+.header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   padding: 20px 100px;
-  background-color: blue;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 99;
 }
 
-.logo{
+.logo {
   font-size: 2em;
   color: #fff;
   text-decoration: none;
@@ -36,7 +36,7 @@
   margin-left: 40px;
 }
 
-.navigation a{
+.navigation a {
   position: relative;
   font-size: 1.1em;
   color: #fff;
@@ -45,25 +45,26 @@
   margin-left: 40px;
 }
 
-.navigation a::after{
-  content: '';
+.navigation a::after {
+  content: "";
   position: absolute;
   left: 0;
   bottom: -6px;
   width: 100%;
+  height: 3px;
   background: #fff;
   border-radius: 5px;
   transform-origin: right;
   transform: scaleX(0);
-  transition: .5s;
+  transition: 0.5s;
 }
 
-.navigation a:hover::after{
+.navigation a:hover::after {
   transform-origin: left;
   transform: scaleX(1);
 }
 
-.navigation .btnEntrar{
+.navigation .btnEntrar {
   width: 130px;
   height: 50px;
   background: transparent;
@@ -74,16 +75,35 @@
   font-size: 1.1em;
   color: #fff;
   font-weight: 500;
-  margin-left:40px ;
-  transition: .5s;
+  margin-left: 100px;
+  transition: 0.5s;
 }
 
-.navigation .btnEntrar:hover{
+.btnEntrar {
+  width: 130px;
+  height: 50px;
+  background: transparent;
+  outline: none;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1em;
+  color: #fff;
+  margin-right: 40px;
+  transition: 0.5s;
+}
+
+.btnEntrar:hover {
   background: #fff;
   color: #162938;
 }
 
-.btnRegistrar{
+.navigation .btnEntrar:hover {
+  background: #fff;
+  color: #162938;
+}
+
+.btnRegistrar {
   width: 130px;
   height: 50px;
   background: transparent;
@@ -94,11 +114,29 @@
   font-size: 1.1em;
   color: #fff;
   font-weight: 500;
-  margin-left:40px ;
-  transition: .5s;
+  margin-left: 130px;
+  transition: 0.5s;
+  margin-top: 40px;
 }
 
-.btnRegistrar:hover{
+.btnRegistrar:hover {
   background: #fff;
   color: #162938;
+}
+
+.welcome h1 {
+  font-size: 4.5rem;
+  color: #fff;
+}
+
+.welcome p {
+  color: #fff;
+  font-size: 2rem;
+}
+
+.welcome h3 {
+  font-size: 15px;
+  color: #fff;
+  margin-left: 120px;
+  margin-top: 10px;
 }

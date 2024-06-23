@@ -20,6 +20,7 @@ import Evento from "./componentes/eventos/Evento.jsx";
 import Notificacao from "./componentes/notificacao/Notificacao.jsx";
 import Noticias from "./componentes/noticias/Noticias.jsx";
 import BoasVindas from "./paginas/boasvindas/BoasVindas.jsx";
+import Atualizar from "./paginas/atualizarPerfil/Atualizar.jsx";
 
 //setting up react query
 const queryClient = new QueryClient({
@@ -34,6 +35,9 @@ const queryClient = new QueryClient({
 function App() {
   const router = createBrowserRouter([
     { path: "/", element: <BoasVindas /> },
+    { path: "/login", element: <Login /> },
+    { path: "/registrar", element: <Registrar /> },
+    { path: "/atualizar", element: <Atualizar /> },
     {
       element: <AppLayout />,
       errorElement: <Erro />,
@@ -112,8 +116,6 @@ function App() {
         },
       ],
     },
-    { path: "/login", element: <Login /> },
-    { path: "/registrar", element: <Registrar /> },
   ]);
 
   return (
