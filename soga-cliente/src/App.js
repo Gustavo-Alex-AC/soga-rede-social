@@ -1,5 +1,4 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Exemplo from "./componentes/exemplo/Exemplo";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./paginas/login/Login";
@@ -20,6 +19,7 @@ import Definicoes from "./componentes/definicoes/Definicoes.jsx";
 import Evento from "./componentes/eventos/Evento.jsx";
 import Notificacao from "./componentes/notificacao/Notificacao.jsx";
 import Noticias from "./componentes/noticias/Noticias.jsx";
+import BoasVindas from "./paginas/boasvindas/BoasVindas.jsx";
 
 //setting up react query
 const queryClient = new QueryClient({
@@ -33,7 +33,7 @@ const queryClient = new QueryClient({
 
 function App() {
   const router = createBrowserRouter([
-    { path: "/", element: <Exemplo /> },
+    { path: "/", element: <BoasVindas /> },
     {
       element: <AppLayout />,
       errorElement: <Erro />,
