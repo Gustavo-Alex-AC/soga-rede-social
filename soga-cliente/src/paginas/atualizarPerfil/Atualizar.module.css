@@ -18,7 +18,7 @@ textarea {
 }
 
 button {
-  background-color: darkblue;
+  background-color: #5271ff;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -27,5 +27,5 @@ button {
 }
 
 button:hover {
-  background-color: darkblue;
+  background-color: #5271ff;
 }

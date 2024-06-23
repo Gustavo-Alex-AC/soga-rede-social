@@ -1,0 +1,93 @@
+.in {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5;
+}
+
+.dividirEvento {
+  padding: 50px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  background-color: white;
+}
+
+.main {
+  width: 80%;
+  padding: 20px;
+  margin-left: 100px;
+}
+.main h2 {
+  margin-top: 0;
+  margin-left: 20px;
+}
+.evento {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgb(210, 216, 228);
+}
+.evento img {
+  width: 100%;
+}
+.evento content {
+  padding: 15px;
+}
+.evento h3 {
+  margin: 0 0 10px 0;
+}
+.evento p {
+  margin: 5px 0;
+  color: #65676b;
+}
+
+.evento {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgb(210, 216, 228);
+}
+
+.event {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgb(210, 216, 228);
+}
+
+.event img {
+  width: 100%;
+}
+.event content {
+  padding: 15px;
+}
+.event h3 {
+  margin: 0 0 10px 0;
+}
+.event p {
+  margin: 5px 0;
+  color: #65676b;
+}
+
+.content {
+  margin-left: 50px;
+  padding: 5px;
+}
+
+.btn {
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.btn:hover {
+  background-color: hsl(216, 75%, 57%);
+  color: white;
+}

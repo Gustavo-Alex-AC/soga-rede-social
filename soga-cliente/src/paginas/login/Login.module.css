@@ -28,7 +28,7 @@
 
 .form h2 {
   margin-bottom: 20px;
-  color: darkblue;
+  color: #5271ff;
   text-align: center;
   font-size: 30px;
 }
@@ -75,7 +75,7 @@
 
 .btnEntrar {
   background-color: #fff;
-  border: 1px solid darkblue;
+  border: 1px solid #5271ff;
   padding: 12px;
   font-size: 16px;
   cursor: pointer;
@@ -83,10 +83,10 @@
   border-radius: 15px;
   margin-left: 60px;
   width: 150px;
-  color: darkblue;
+  color: #5271ff;
 }
 
 .btnEntrar:hover {
-  background-color: darkblue;
+  background-color: #5271ff;
   color: #fff;
 }
