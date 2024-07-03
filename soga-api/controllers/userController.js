@@ -34,10 +34,10 @@ exports.getUserById = async (req, res) => {
   }
 };
 
-/*// Update a user's profile
 exports.updateUser = async (req, res) => {
   const { id } = req.params;
-  const { nome, email, password, profile_picture, bio, interests } = req.body;
+  const { nome, email, password, bio, interests } = req.body;
+  const profile_picture = req.file ? req.file.filename : null;
 
   try {
     const user = await User.findByPk(id);
@@ -51,13 +51,23 @@ exports.updateUser = async (req, res) => {
       req.body.password = await bcrypt.hash(password, salt);
     }
 
-    await user.update(req.body);
+    //await user.update(req.body);
+    await user.update({
+      nome,
+      email,
+      password,
+      bio,
+      interests,
+      profile_picture,
+    });
 
     res.status(200).json({ message: "User updated successfully", user });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
+/*// Update a user's profile
 
 // Delete a user
 exports.deleteUser = async (req, res) => {

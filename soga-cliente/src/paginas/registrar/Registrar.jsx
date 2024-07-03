@@ -1,10 +1,13 @@
 import style from "./Registrar.module.css";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import GlobalContext from "../../context/GlobalContext";
 
 function Registrar() {
+  const { setUser } = useContext(GlobalContext);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,11 +16,16 @@ function Registrar() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`http://localhost:3000/api/auth/register`, {
+      const res = await axios.post(`http://localhost:3000/api/auth/register`, {
         nome,
         email,
         password,
       });
+
+      const token = res.data.token;
+      localStorage.setItem("token", token);
+      const decodedToken = jwtDecode(token);
+      setUser(decodedToken);
       navigate("/atualizar");
     } catch (error) {
       console.error(error);
