@@ -2,8 +2,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors"); // Import the cors package
-const app = express();
-const port = 3000;
+const app = require ('express')(); //Constante criada ja instanciada
+const PORT = 3001;
+const io = require('socket.io')(server, {cors: {origin: "http://localhost:3001"}} )
+const server = require('http').createServer(app)
+
+server.listen(PORT, () => console.log('Server running...'))
 
 // Configurar middleware
 app.use((req, res, next) => {
@@ -33,6 +37,7 @@ const eventoParticipanteRoutes = require("./routes/eventoParticipantes");
 const mensagensRoutes = require("./routes/mensagens");
 const notificacaosRoutes = require("./routes/notificacaos");
 const relacionamentosRoutes = require("./routes/relacionamentos");
+const { Socket } = require("socket.io");
 
 // Usar as rotas
 app.use("/api/auth", authRoutes);
@@ -53,3 +58,17 @@ app.use("/api/relacionamentos", relacionamentosRoutes);
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+
+
+socket.on('set_username', username => {
+  socket.data.username
+})
+
+
+socket.on('message', text =>{
+  io.emit('recive_message', {
+    text,
+    authorId: socket.id,
+    author: socket.data.username
+  })
+})
