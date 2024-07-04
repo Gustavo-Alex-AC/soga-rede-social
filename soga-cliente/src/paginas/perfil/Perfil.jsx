@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { FaEdit, FaCamera } from "react-icons/fa";
 import { fetchUser } from "../../services/userData";
 import { toast } from "react-toastify";
 import style from "./Perfil.module.css";
@@ -14,10 +13,6 @@ import GlobalContext from "../../context/GlobalContext";
 
 function Perfil() {
   const { user } = useContext(GlobalContext);
-  const [name, setName] = useState("");
-  const [profilePic, setProfilePic] = useState("");
-  const [bio, setBio] = useState("");
-  const [interests, setInterests] = useState("");
   const { setUserData } = useContext(UserDataContext);
   const { userId } = useParams(); // Capture userId from URL
 
@@ -70,22 +65,6 @@ function Perfil() {
     user: userData,
   }));
 
-  // Handle profile picture change
-  const handleProfilePicChange = (e) => {
-    setProfilePic(URL.createObjectURL(e.target.files[0]));
-  };
-
-  const [isEditing, setIsEditing] = useState({
-    name: false,
-    bio: false,
-    interests: false,
-  });
-
-  // Toggle edit mode for fields
-  const toggleEdit = (field) => {
-    setIsEditing((prev) => ({ ...prev, [field]: !prev[field] }));
-  };
-
   // Handling the returns
   if (isLoadingUserData || isLoadingPosts) {
     return <Spinner />;
@@ -99,6 +78,8 @@ function Perfil() {
     );
   }
 
+  console.log("Profile:", userData);
+
   return (
     <div className={style.profile}>
       <div className={style.images}>
@@ -109,11 +90,14 @@ function Perfil() {
         />
         <div className={style.profilePicContainer}>
           <img
-            src={userData?.profile_picture}
+            src={
+              `http://localhost:3000/uploads/${userData?.profile_picture}` ||
+              "/uploads/default-profile.jpg"
+            }
             alt="Profile"
             className={style.profilePic}
           />
-          <FaCamera
+          {/* <FaCamera
             onClick={() => document.getElementById("profilePicInput").click()}
             className={style.editProfilePicIcon}
             size={25}
@@ -123,78 +107,40 @@ function Perfil() {
             id="profilePicInput"
             onChange={handleProfilePicChange}
             className={style.fileInput}
-          />
+          /> */}
         </div>
       </div>
       <div className={style.profileContainer}>
         <div className={style.uInfo}>
           <div className={style.nameContainer}>
-            {isEditing.name ? (
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                onBlur={() => toggleEdit("name")}
-                className={style.nameInput}
-              />
-            ) : (
-              <span className={style.name}>{userData?.nome}</span>
-            )}
-            <FaEdit
-              onClick={() => toggleEdit("name")}
-              className={style.editIcon}
-            />
+            <span className={style.name}>{userData?.nome}</span>
           </div>
           <div className={style.info}>
             <div className={style.item}>
               <div className={style.itemBioIcon}>
                 <h2>Biografia</h2>
-                <FaEdit
-                  onClick={() => toggleEdit("bio")}
-                  className={style.editIcon}
-                />
               </div>
               <div className={style.itemDiv}>
                 <div>
-                  {isEditing.bio ? (
-                    <textarea
-                      value={bio}
-                      onChange={(e) => setBio(e.target.value)}
-                      onBlur={() => toggleEdit("bio")}
-                      className={style.bioInput}
-                    ></textarea>
-                  ) : (
-                    <p className={style.bio}>{userData?.bio}</p>
-                  )}
+                  <p className={style.bio}>{userData?.bio}</p>
                 </div>
               </div>
             </div>
             <div className={style.item}>
               <div className={style.itemBioIcon}>
                 <h2>Interesses</h2>
-                <FaEdit
-                  onClick={() => toggleEdit("interests")}
-                  className={style.editIcon}
-                />
               </div>
               <div className={style.itemDiv}>
                 <div>
-                  {isEditing.interests ? (
-                    <textarea
-                      value={interests}
-                      onChange={(e) => setInterests(e.target.value)}
-                      onBlur={() => toggleEdit("interests")}
-                      className={style.interestsInput}
-                    ></textarea>
-                  ) : (
-                    <p className={style.interests}>{userData?.interests}</p>
-                  )}
+                  <p className={style.interests}>{userData?.interests}</p>
                 </div>
               </div>
             </div>
           </div>
           {user ? (
-            <button className={style.friendButton}>Atualizar perfil</button>
+            <Link to={"/atualizarPerfil"}>
+              <button className={style.friendButton}>Atualizar perfil</button>
+            </Link>
           ) : (
             <button className={style.friendButton}>Pedir amizade</button>
           )}

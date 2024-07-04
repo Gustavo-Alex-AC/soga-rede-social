@@ -1,4 +1,5 @@
 import Pedidos from "../amizades/Pedidos";
+import Sugestoes from "../amizades/Sugestoes";
 import Contactos from "./Contactos";
 import style from "./RightBar.module.css";
 
@@ -9,6 +10,11 @@ function RightBar() {
         <div className={style.item}>
           <span>Pedidos de amizades</span>
           <Pedidos />
+        </div>
+
+        <div className={style.item}>
+          <span>Sugestões de amizades</span>
+          <Sugestoes />
         </div>
 
         <div className={style.item}>

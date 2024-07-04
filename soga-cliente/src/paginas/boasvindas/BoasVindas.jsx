@@ -12,11 +12,11 @@ function BoasVindas() {
       <body className={style.body}>
         <header className={style.header}>
           <h2 className={style.logo}>SOGA</h2>
-          <nav className={style.navigation}>
+          {/* <nav className={style.navigation}>
             <Link href="#">Termos e Condições</Link>
             <Link href="#">Grupos</Link>
             <Link href="#">Sobre</Link>
-          </nav>
+          </nav> */}
           <Link to="/login">
             <button className={style.btnEntrar}>Entrar</button>
           </Link>

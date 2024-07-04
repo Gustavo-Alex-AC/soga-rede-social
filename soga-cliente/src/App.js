@@ -114,6 +114,14 @@ function App() {
             </RotaProtegida>
           ),
         },
+        {
+          path: "/atualizarPerfil",
+          element: (
+            <RotaProtegida>
+              <Atualizar />
+            </RotaProtegida>
+          ),
+        },
       ],
     },
   ]);

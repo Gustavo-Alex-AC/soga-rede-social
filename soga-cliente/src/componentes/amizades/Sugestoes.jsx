@@ -1,14 +1,16 @@
-import Pedido from "./Pedido";
-import { acceptRequest, deleteRequest } from "../../services/amizadesData";
+import { deleteRequest, sendRequest } from "../../services/amizadesData";
 import Spinner from "../../ui/Spinner";
 import Erro from "../../ui/Erro";
-import usePedidos from "../../hooks/usePedidos";
+import useSugestoes from "../../hooks/useSugestoes";
+import Sugestao from "./Sugestao";
 
-function Pedidos() {
-  const { isError, isLoading, error, pedidos, queryClient } = usePedidos();
+function Sugestoes() {
+  const { isError, isLoading, error, sugestoes, queryClient } = useSugestoes();
 
-  const handleAcceptRequest = async (requestId) => {
-    await acceptRequest(requestId);
+  console.log("sugestoes:", sugestoes);
+
+  const handleSendRequest = async (requestId, relacaoId) => {
+    await sendRequest(requestId, relacaoId);
     queryClient.invalidateQueries("relacionamentos");
   };
 
@@ -32,12 +34,12 @@ function Pedidos() {
 
   return (
     <>
-      {pedidos?.length ? (
-        pedidos?.map((pedido) => (
-          <Pedido
-            pedido={pedido}
-            key={pedido.id}
-            handleAcceptRequest={handleAcceptRequest}
+      {sugestoes?.length ? (
+        sugestoes?.map((sugestao) => (
+          <Sugestao
+            data={sugestao}
+            key={sugestao.id}
+            handleSendRequest={handleSendRequest}
             handleDeleteRequest={handleDeleteRequest}
           />
         ))
@@ -50,11 +52,11 @@ function Pedidos() {
             fontSize: "0.9rem",
           }}
         >
-          Nenhum pedido...
+          Nenhuma sugestão...
         </p>
       )}
     </>
   );
 }
 
-export default Pedidos;
+export default Sugestoes;

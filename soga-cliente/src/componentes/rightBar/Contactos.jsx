@@ -1,4 +1,3 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useContext, useEffect, useState } from "react";
 import GlobalContext from "../../context/GlobalContext";
 
@@ -9,7 +8,6 @@ const BASEURL = "http://localhost:3000/api/relacionamentos";
 
 function Contactos() {
   const { user } = useContext(GlobalContext);
-  const queryClient = useQueryClient();
   const [amizades, setAmizades] = useState([]);
 
   useEffect(() => {
@@ -34,7 +32,14 @@ function Contactos() {
           <Contacto contacto={contacto} key={contacto.id} />
         ))
       ) : (
-        <p style={{ textAlign: "center", marginTop: "10px", color: "gray" }}>
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: "10px",
+            color: "gray",
+            fontSize: "0.9rem",
+          }}
+        >
           Nenhum Contacto...
         </p>
       )}

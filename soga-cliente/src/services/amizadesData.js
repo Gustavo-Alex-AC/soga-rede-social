@@ -20,12 +20,33 @@ export const fetchPendingRequests = async (userId) => {
   }
 };
 
+export const fetchSuggestionRequests = async (userId) => {
+  try {
+    const response = await axios.get(`${BASEURL}/suggestions/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error suggestions pending requests:", error);
+  }
+};
+
 export const acceptRequest = async (requestId) => {
   try {
     const res = await axios.put(`${BASEURL}/accept/${requestId}`);
     return res.data;
   } catch (error) {
     console.error("Error accepting request:", error);
+  }
+};
+
+export const sendRequest = async (requestId, relacaoId) => {
+  try {
+    const res = await axios.post(`${BASEURL}/send`, {
+      userId: requestId,
+      relacaoId,
+    });
+    return res.data;
+  } catch (error) {
+    console.error("Error send request:", error);
   }
 };
 

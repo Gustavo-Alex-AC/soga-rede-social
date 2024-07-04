@@ -1,5 +1,4 @@
 import style from "./Atualizar.module.css";
-
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -18,8 +17,6 @@ function Atualizar() {
     formData.append("profile_picture", foto);
     formData.append("bio", biografia);
     formData.append("interests", interesses);
-
-    console.log("formData:", [...formData.entries()]); // Log the form data
 
     try {
       await axios.put(`http://localhost:3000/api/users/${user.id}`, formData, {
@@ -41,7 +38,7 @@ function Atualizar() {
           <label htmlFor="foto">Fotografia</label>
           <input
             type="file"
-            accept="image/*"
+            id="file"
             onChange={(e) => setFoto(e.target.files[0])}
           />
         </div>
@@ -50,12 +47,14 @@ function Atualizar() {
           <textarea
             value={biografia}
             onChange={(e) => setBiografia(e.target.value)}
-          ></textarea>
+          />
+        </div>
+        <div className={style.inputBox}>
           <label htmlFor="interesses">Interesses</label>
           <textarea
             value={interesses}
             onChange={(e) => setInteresses(e.target.value)}
-          ></textarea>
+          />
         </div>
         <button type="submit">Salvar</button>
       </form>

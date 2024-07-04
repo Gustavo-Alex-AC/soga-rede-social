@@ -59,7 +59,10 @@ function Compartilhar() {
         <form onSubmit={handleSubmit}>
           <div className={style.top}>
             <img
-              src={userData?.profile_picture || "/uploads/default_profile.png"}
+              src={
+                `http://localhost:3000/uploads/${userData.profile_picture}` ||
+                "/uploads/default_profile.png"
+              }
               alt="user"
             />
             <input

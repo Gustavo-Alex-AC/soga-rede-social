@@ -96,6 +96,15 @@
   object-fit: cover;
 }
 
+.active {
+  font-weight: bold; /* Example active styling */
+  color: darkblue;
+}
+
+.unctive {
+  background-color: red;
+}
+
 /* Media Queries */
 @media (max-width: 480px) {
   .search input {

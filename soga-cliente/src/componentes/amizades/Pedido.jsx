@@ -11,7 +11,13 @@ function Pedido({ pedido, handleAcceptRequest, handleDeleteRequest }) {
     <>
       <div className={style.user}>
         <div className={style.userInfo}>
-          <img src={pedido?.user?.profile_picture} alt="" />
+          <img
+            src={
+              `http://localhost:3000/uploads/${pedido?.user?.profile_picture}` ||
+              "/uploads/default-profile.jpg"
+            }
+            alt=""
+          />
           <span>{pedido?.user?.nome}</span>
         </div>
         <div className={style.buttons}>

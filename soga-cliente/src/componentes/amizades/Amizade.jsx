@@ -11,7 +11,14 @@ function Amizade({ data, handleDeleteRequest, handleAcceptRequest, pedido }) {
   return (
     <div className={style.user}>
       <div className={style.userInfo}>
-        <img src={data?.profile_picture || data?.user.profile_picture} alt="" />
+        <img
+          src={
+            `http://localhost:3000/uploads/${
+              data?.profile_picture || data?.user.profile_picture
+            }` || "/uploads/default-profile.jpg"
+          }
+          alt=""
+        />
       </div>
       <div className={style.cardItem}>
         <span>{data?.nome || data?.user.nome}</span>

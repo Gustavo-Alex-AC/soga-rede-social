@@ -11,7 +11,13 @@ function Contacto({ contacto }) {
   return (
     <div className={style.user}>
       <div className={style.userInfo}>
-        <img src={contacto?.profile_picture} alt="" />
+        <img
+          src={
+            `http://localhost:3000/uploads/${contacto?.profile_picture}` ||
+            "/uploads/default-profile.jpg"
+          }
+          alt=""
+        />
         <div className={style.online} />
         <span>{contacto?.nome}</span>
       </div>

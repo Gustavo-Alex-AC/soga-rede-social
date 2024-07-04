@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import style from "./Navbar.module.css";
 
 import { ImSearch } from "react-icons/im";
@@ -15,6 +15,7 @@ function NavBar() {
   const { userData } = useContext(UserDataContext);
   const { user, setUser } = useContext(GlobalContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   function logout() {
     if (user) {
@@ -43,24 +44,45 @@ function NavBar() {
       </div>
 
       <div className={style.middle}>
+        <sp></sp>
         <NavLink to={"/home"}>
-          <AiOutlineHome size={26} />
+          <AiOutlineHome
+            size={26}
+            color={location.pathname === "/home" ? "darkblue" : ""}
+          />
         </NavLink>
         <NavLink to={`/perfil/${user?.id}`}>
-          <FaRegUser size={25} />
+          <FaRegUser
+            size={25}
+            color={
+              location.pathname === `/perfil/${user?.id}` ? "darkblue" : ""
+            }
+          />
         </NavLink>
         <NavLink to={`/notificacao`}>
-          <IoNotificationsOutline size={25} />
+          <IoNotificationsOutline
+            size={25}
+            color={location.pathname === "/notificacao" ? "darkblue" : ""}
+          />
         </NavLink>
         <NavLink to={`/mensagem`}>
-          <FaRegMessage size={25} />
+          <FaRegMessage
+            size={25}
+            color={location.pathname === "/mensagem" ? "darkblue" : ""}
+          />
         </NavLink>
       </div>
 
       <div className={style.right}>
         <div className={style.user}>
           <NavLink to={`/perfil/${user?.id}`}>
-            <img src={userData?.profile_picture} alt="user" />
+            <img
+              src={
+                `http://localhost:3000/uploads/${userData?.profile_picture}` ||
+                "/uploads/default-profile.jpg"
+              }
+              alt="user"
+            />
           </NavLink>
         </div>
 

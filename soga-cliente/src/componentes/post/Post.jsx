@@ -80,7 +80,13 @@ function Post({ post, userData }) {
       <div className={style.container}>
         <div className={style.user}>
           <div className={style.userInfo}>
-            <img src={userData?.profile_picture} alt="" />
+            <img
+              src={
+                `http://localhost:3000/uploads/${userData?.profile_picture}` ||
+                "/uploads/default-profile.jpg"
+              }
+              alt=""
+            />
             <div className={style.details}>
               <Link
                 to={`/profile/${post.userId}`}

@@ -36,7 +36,7 @@ exports.getUserById = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   const { id } = req.params;
-  const { nome, email, password, bio, interests } = req.body;
+  const { bio, interests } = req.body;
   const profile_picture = req.file ? req.file.filename : null;
 
   try {
@@ -45,17 +45,7 @@ exports.updateUser = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Hash the new password if it's provided
-    if (password) {
-      const salt = await bcrypt.genSalt(10);
-      req.body.password = await bcrypt.hash(password, salt);
-    }
-
-    //await user.update(req.body);
     await user.update({
-      nome,
-      email,
-      password,
       bio,
       interests,
       profile_picture,
@@ -66,8 +56,6 @@ exports.updateUser = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
-/*// Update a user's profile
 
 // Delete a user
 exports.deleteUser = async (req, res) => {
@@ -84,4 +72,4 @@ exports.deleteUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-};*/
+};

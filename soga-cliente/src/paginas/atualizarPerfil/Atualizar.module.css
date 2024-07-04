@@ -1,31 +1,59 @@
+/* Atualizar.module.css */
 .container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+
+  -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  border-radius: 8px;
+  background-color: #ffffff; /* Replace with the actual color from themed("bg") */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
   text-align: center;
-  margin-top: 50px;
+  color: #555;
 }
 
 .inputBox {
-  margin: 20px 0;
+  margin-bottom: 20px;
 }
 
-input[type="file"] {
-  margin-top: 10px;
+.inputBox label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-textarea {
+.inputBox input,
+.inputBox textarea {
   width: 100%;
-  height: 100px;
-  margin-top: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-button {
-  background-color: #5271ff;
+.inputBox textarea {
+  height: 100px; /* Example height for textarea */
+}
+
+button[type="submit"] {
+  background-color: #007bff;
   color: white;
   border: none;
   padding: 10px 20px;
   font-size: 1rem;
   cursor: pointer;
+  border-radius: 4px;
 }
 
-button:hover {
-  background-color: #5271ff;
+button[type="submit"]:hover {
+  background-color: #0056b3;
 }

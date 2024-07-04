@@ -1,5 +1,6 @@
 const { Relacionamento, User } = require("../models");
-const Sequelize = require("sequelize"); // Add this line
+const Sequelize = require("sequelize");
+const { Op } = require("sequelize");
 
 // Send a friendship request
 exports.sendFriendRequest = async (req, res) => {
@@ -51,6 +52,7 @@ exports.deleteFriendRequest = async (req, res) => {
 };
 
 // Fetch all friends
+// Fetch all friends
 exports.getAllFriends = async (req, res) => {
   const { userId } = req.params;
   try {
@@ -75,6 +77,9 @@ exports.getAllFriends = async (req, res) => {
       ],
     });
 
+    // Log the fetched friends
+    console.log("Friends fetched:", friends);
+
     const friendList = friends.map((friend) => {
       if (friend.user_id == userId) {
         return {
@@ -90,6 +95,9 @@ exports.getAllFriends = async (req, res) => {
         };
       }
     });
+
+    // Log the friend list
+    console.log("Friend list:", friendList);
 
     res.json(friendList);
   } catch (error) {
@@ -110,7 +118,11 @@ exports.getFriendSuggestions = async (req, res) => {
       attributes: ["relacao_id"],
     });
 
+    console.log("Friends fetched:", friends);
+
     const friendIds = friends.map((friend) => friend.relacao_id);
+
+    console.log("Friend IDs:", friendIds);
 
     const suggestions = await User.findAll({
       where: {
@@ -121,6 +133,8 @@ exports.getFriendSuggestions = async (req, res) => {
       attributes: ["id", "nome", "profile_picture"],
       limit: 10,
     });
+
+    console.log("Suggestions fetched:", suggestions);
 
     res.json(suggestions);
   } catch (error) {
