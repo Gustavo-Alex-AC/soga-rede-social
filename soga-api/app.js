@@ -2,8 +2,19 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors"); // Import the cors package
+const http = require('http');
+const { Server } = require('socket.io');
+
 const app = express();
-const port = 3000;
+const port = 3001;
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000", // Update this to match your frontend origin
+    methods: ["GET", "POST"]
+  }
+});
+
 
 // Configurar middleware
 app.use((req, res, next) => {
@@ -48,6 +59,29 @@ app.use("/api/eventoParticipantes", eventoParticipanteRoutes);
 app.use("/api/mensagens", mensagensRoutes);
 app.use("/api/notificacaos", notificacaosRoutes);
 app.use("/api/relacionamentos", relacionamentosRoutes);
+
+// Configurar o Socket.io
+io.on('connection', (socket) => {
+  console.log('New client connected');
+
+  socket.on('set_username', (username) => {
+    socket.data.username = username;
+  });
+
+  socket.on('mensagem', (text) => {
+    const message = {
+      text,
+      authorId: socket.id,
+      author: socket.data.username || 'Anon'
+    };
+    io.emit('recive_message', message);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});
+
 
 // Iniciar servidor
 app.listen(port, () => {
