@@ -1,28 +1,26 @@
+// NavBar.jsx
+import React, { useContext } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import style from "./Navbar.module.css";
-
-import { ImSearch } from "react-icons/im";
 import { AiOutlineHome } from "react-icons/ai";
 import { IoMoonOutline, IoNotificationsOutline } from "react-icons/io5";
 import { FaRegMessage, FaRegUser } from "react-icons/fa6";
 import { PiSignOutLight } from "react-icons/pi";
-import { useContext } from "react";
-
-import UserDataContext from "../../context/UserDataContext";
 import GlobalContext from "../../context/GlobalContext";
+import UserDataContext from "../../context/UserDataContext";
+import SearchBar from "../searchBar/SearchBar";
 
 function NavBar() {
-  const { userData } = useContext(UserDataContext);
   const { user, setUser } = useContext(GlobalContext);
+  const { userData } = useContext(UserDataContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   function logout() {
     if (user) {
       setUser(null);
-      navigate("/login");
+      navigate("/");
     }
-    // console.log("Logout...:", user);
   }
 
   return (
@@ -31,20 +29,10 @@ function NavBar() {
         <Link to="/" style={{ textDecoration: "none" }}>
           <span style={{ fontSize: "1.8rem" }}>SOGA</span>
         </Link>
-        {/* {darkMode ? (
-          <WbSunnyOutlinedIcon onClick={toggle} />
-        ) : (
-          <DarkModeOutlinedIcon onClick={toggle} />
-        )} */}
-        {/* <GridViewOutlinedIcon /> */}
-        <div className={style.search}>
-          <ImSearch size={20} />
-          <input type="text" placeholder="Pesquisar..." />
-        </div>
+        <SearchBar />
       </div>
 
       <div className={style.middle}>
-        <sp></sp>
         <NavLink to={"/home"}>
           <AiOutlineHome
             size={26}
@@ -77,17 +65,12 @@ function NavBar() {
         <div className={style.user}>
           <NavLink to={`/perfil/${user?.id}`}>
             <img
-              src={
-                `http://localhost:3000/uploads/${userData?.profile_picture}` ||
-                "/uploads/default-profile.jpg"
-              }
+              src={`http://localhost:3000/uploads/${userData?.profile_picture}`}
               alt="user"
             />
           </NavLink>
         </div>
-
         <IoMoonOutline size={25} />
-
         <PiSignOutLight size={25} onClick={logout} />
       </div>
     </div>

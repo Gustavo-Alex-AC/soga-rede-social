@@ -1,11 +1,19 @@
+import { useContext } from "react";
+import { acceptRequest, deletefriend } from "../../services/amizadesData";
 import style from "./Amizade.module.css";
+import GlobalContext from "../../context/GlobalContext";
 
-function Amizade({ data, handleDeleteRequest, handleAcceptRequest, pedido }) {
-  function handleDelete() {
-    handleDeleteRequest(data.id);
+function Amizade({ data, queryClient }) {
+  const { user } = useContext(GlobalContext);
+
+  async function handleDelete() {
+    await deletefriend(user.id, data.id);
+    queryClient.invalidateQueries("relacionamentos/delelefriend");
   }
-  function handleAccept() {
-    handleAcceptRequest(data.id);
+
+  async function handleAccept() {
+    await acceptRequest(data.id);
+    queryClient.invalidateQueries("relacionamentos/accept");
   }
 
   return (

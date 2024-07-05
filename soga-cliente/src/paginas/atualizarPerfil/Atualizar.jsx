@@ -3,18 +3,25 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
+import UserDataContext from "../../context/UserDataContext";
 
 function Atualizar() {
   const { user } = useContext(GlobalContext);
-  const [foto, setFoto] = useState(null);
-  const [biografia, setBiografia] = useState("");
-  const [interesses, setInteresses] = useState("");
+  const { userData } = useContext(UserDataContext);
+  const [foto, setFoto] = useState(null); // Initialize with null
+  const [biografia, setBiografia] = useState(userData?.bio || "");
+  const [interesses, setInteresses] = useState(userData?.interests || "");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("profile_picture", foto);
+    if (foto) {
+      formData.append("profile_picture", foto);
+    } else if (userData?.profile_picture) {
+      formData.append("profile_picture", userData.profile_picture);
+    }
+
     formData.append("bio", biografia);
     formData.append("interests", interesses);
 
@@ -24,7 +31,7 @@ function Atualizar() {
           "Content-Type": "multipart/form-data",
         },
       });
-      navigate("/login");
+      navigate("/home");
     } catch (error) {
       console.error(error);
     }
@@ -42,6 +49,16 @@ function Atualizar() {
             onChange={(e) => setFoto(e.target.files[0])}
           />
         </div>
+        {userData?.profile_picture && (
+          <div className={style.inputBox}>
+            <label>Current Profile Picture</label>
+            <img
+              src={`http://localhost:3000/uploads/${userData.profile_picture}`}
+              alt="Current Profile"
+              style={{ width: "100%" }}
+            />
+          </div>
+        )}
         <div className={style.inputBox}>
           <label htmlFor="biografia">Biografia</label>
           <textarea

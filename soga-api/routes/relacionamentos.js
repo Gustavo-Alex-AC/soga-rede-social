@@ -5,6 +5,10 @@ const relacionamentoController = require("../controllers/relacionamentoControlle
 router.post("/send", relacionamentoController.sendFriendRequest);
 router.put("/accept/:id", relacionamentoController.acceptFriendRequest);
 router.delete("/delete/:id", relacionamentoController.deleteFriendRequest);
+router.delete(
+  "/deletefriend/:userId/:friendId",
+  relacionamentoController.deleteFriendship
+);
 router.get("/friends/:userId", relacionamentoController.getAllFriends);
 router.get(
   "/suggestions/:userId",

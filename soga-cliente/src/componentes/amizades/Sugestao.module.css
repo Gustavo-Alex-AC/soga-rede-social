@@ -106,6 +106,15 @@
   background-color: #5271ff;
 }
 
+.disable button {
+  border: none;
+  padding: 8px 20px;
+  cursor: pointer;
+  border-radius: 16px;
+  background-color: lightgray;
+  color: #333;
+}
+
 /* Media Queries */
 @media (max-width: 480px) {
   .rightBar {

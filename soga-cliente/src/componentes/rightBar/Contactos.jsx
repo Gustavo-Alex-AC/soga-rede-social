@@ -23,8 +23,6 @@ function Contactos() {
     fetchFriends();
   }, [user.id]);
 
-  console.log("Friends: ", amizades);
-
   return (
     <>
       {amizades?.length ? (

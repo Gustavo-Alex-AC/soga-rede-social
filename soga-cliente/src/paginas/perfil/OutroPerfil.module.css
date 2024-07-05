@@ -1,0 +1,249 @@
+.profile {
+  background-color: #f9fafb; /* Replace with the actual color from themed("bgSoft") */
+  font-family: Arial, sans-serif;
+  color: #555; /* Replace with the actual color from themed("textColor") */
+}
+
+.images {
+  width: 100%;
+  height: 250px;
+  position: relative;
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profilePicContainer {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  top: calc(100% - 10px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profilePic {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.editProfilePicIcon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.profileContainer {
+  padding: 20px 70px;
+  margin-top: 0;
+}
+
+.uInfo {
+  background-color: #ffffff; /* Replace with the actual color from themed("bg") */
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+.nameContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Added gap for space between name and edit icon */
+  margin-bottom: 20px;
+  align-self: center;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nameInput {
+  width: 70%;
+  padding: 8px;
+  font-size: 18px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.bio,
+.interests {
+  margin-top: 0;
+  padding: 10px;
+  /* background-color: #f1f1f1;
+    border-radius: 5px; */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bioInput,
+.interestsInput {
+  width: 100%;
+  padding: 10px;
+  margin-top: 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  resize: vertical;
+  font-size: 16px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  /* Gap between text and edit icon */
+}
+
+.itemBioIcon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.item h2 {
+  font-size: 16px;
+}
+
+.itemDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.editIcon {
+  color: #5271ff;
+  cursor: pointer;
+}
+
+.friendButtonContainer {
+  text-align: center;
+}
+
+.friendButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.friendButton {
+  background-color: #5271ff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+  align-self: center;
+  font-size: 1rem;
+}
+
+.friendButtonDisable {
+  background-color: lightgray;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+  align-self: center;
+  font-size: 1rem;
+}
+
+.fileInput {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .profileContainer {
+    padding: 10px;
+  }
+
+  .uInfo {
+    padding: 15px;
+  }
+
+  .name {
+    font-size: 20px;
+  }
+
+  .nameInput {
+    width: 60%;
+  }
+
+  .friendButton {
+    padding: 8px 15px;
+  }
+
+  .profilePicContainer {
+    width: 120px;
+    height: 120px;
+    top: calc(100% - 60px);
+  }
+
+  .profilePic {
+    width: 100%;
+    height: 100%;
+  }
+
+  .editProfilePicIcon {
+    bottom: 5px;
+    right: 5px;
+  }
+
+  .nameContainer {
+    top: -40px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .profileContainer {
+    padding: 15px;
+  }
+
+  .uInfo {
+    padding: 20px;
+  }
+
+  .name {
+    font-size: 22px;
+  }
+
+  .nameInput {
+    width: 65%;
+  }
+
+  .friendButton {
+    padding: 9px 18px;
+  }
+
+  .profilePicContainer {
+    width: 130px;
+    height: 130px;
+  }
+
+  .profilePic {
+    width: 100%;
+    height: 100%;
+  }
+}

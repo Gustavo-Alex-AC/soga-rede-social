@@ -1,16 +1,17 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import style from "./Sugestao.module.css";
 import GlobalContext from "../../context/GlobalContext";
-function Sugestao({ data, handleSendRequest, handleDeleteRequest }) {
-  const { user } = useContext(GlobalContext);
+import { sendRequest } from "../../services/amizadesData";
 
-  function handleConfirmar() {
-    handleSendRequest(user.id, data.id);
-    alert("Pedido enviado");
-  }
-  //   function handleEliminar() {
-  //     handleDeleteRequest(data.id);
-  //   }
+function Sugestao({ data, queryClient }) {
+  const { user } = useContext(GlobalContext);
+  const [display, setDisplay] = useState(false);
+
+  const handleSendRequest = async () => {
+    await sendRequest(user.id, data.id);
+    setDisplay((s) => !s);
+    queryClient.invalidateQueries("relacionamentos/send");
+  };
 
   return (
     <>
@@ -25,9 +26,10 @@ function Sugestao({ data, handleSendRequest, handleDeleteRequest }) {
           />
           <span>{data?.nome}</span>
         </div>
-        <div className={style.buttons}>
-          <button onClick={handleConfirmar}>Pedir Amizade</button>
-          {/* <button onClick={handleEliminar}>Eliminar</button> */}
+        <div className={`${display ? style.disable : style.buttons}`}>
+          <button onClick={handleSendRequest} disabled={display}>
+            {display ? "Pedido enviado" : "Pedir Amizade"}
+          </button>
         </div>
       </div>
     </>

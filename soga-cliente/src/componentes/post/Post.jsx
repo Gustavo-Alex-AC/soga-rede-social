@@ -89,7 +89,7 @@ function Post({ post, userData }) {
             />
             <div className={style.details}>
               <Link
-                to={`/profile/${post.userId}`}
+                to={`/perfilde/${post.user_id}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <span className={style.name}>{userData?.nome}</span>
@@ -99,7 +99,9 @@ function Post({ post, userData }) {
               </span>
             </div>
           </div>
-          <MdOutlineMoreHoriz size={22} />
+          <div>
+            <MdOutlineMoreHoriz size={22} />
+          </div>
         </div>
         <div className={style.content}>
           <p>{post.content}</p>

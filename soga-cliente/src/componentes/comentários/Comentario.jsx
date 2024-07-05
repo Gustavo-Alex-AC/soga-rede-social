@@ -73,7 +73,13 @@ function Comentario({
   return (
     <div className={style.comments}>
       <div className={style.write}>
-        <img src={userData?.profile_picture} alt="" />
+        <img
+          src={
+            `http://localhost:3000/uploads/${userData?.profile_picture}` ||
+            "/uploads/default-profile.jpg"
+          }
+          alt=""
+        />
         <input
           type="text"
           placeholder="Escreve um comentário..."
@@ -85,7 +91,13 @@ function Comentario({
       {comentarios?.length ? (
         comentarios.map((comentario) => (
           <div className={style.comment} key={comentario.id}>
-            <img src={comentario.User?.profile_picture} alt="" />
+            <img
+              src={
+                `http://localhost:3000/uploads/${comentario.User?.profile_picture}` ||
+                "/uploads/default-profile.jpg"
+              }
+              alt=""
+            />
             <div className={style.info}>
               <span>{comentario.User?.nome}</span>
               <p>{comentario.content}</p>

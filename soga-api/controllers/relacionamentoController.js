@@ -51,61 +51,6 @@ exports.deleteFriendRequest = async (req, res) => {
   }
 };
 
-// Fetch all friends
-// Fetch all friends
-exports.getAllFriends = async (req, res) => {
-  const { userId } = req.params;
-  try {
-    const friends = await Relacionamento.findAll({
-      where: {
-        [Sequelize.Op.or]: [
-          { user_id: userId, status: "accepted" },
-          { relacao_id: userId, status: "accepted" },
-        ],
-      },
-      include: [
-        {
-          model: User,
-          as: "User",
-          attributes: ["id", "nome", "profile_picture"],
-        },
-        {
-          model: User,
-          as: "relacao",
-          attributes: ["id", "nome", "profile_picture"],
-        },
-      ],
-    });
-
-    // Log the fetched friends
-    console.log("Friends fetched:", friends);
-
-    const friendList = friends.map((friend) => {
-      if (friend.user_id == userId) {
-        return {
-          id: friend.relacao.id,
-          nome: friend.relacao.nome,
-          profile_picture: friend.relacao.profile_picture,
-        };
-      } else {
-        return {
-          id: friend.User.id,
-          nome: friend.User.nome,
-          profile_picture: friend.User.profile_picture,
-        };
-      }
-    });
-
-    // Log the friend list
-    console.log("Friend list:", friendList);
-
-    res.json(friendList);
-  } catch (error) {
-    console.error("Error fetching friends:", error);
-    res.status(500).json({ message: "Error fetching friends" });
-  }
-};
-
 // Fetch friendship suggestions
 exports.getFriendSuggestions = async (req, res) => {
   const { userId } = req.params;
@@ -118,7 +63,7 @@ exports.getFriendSuggestions = async (req, res) => {
       attributes: ["relacao_id"],
     });
 
-    console.log("Friends fetched:", friends);
+    //console.log("Friends fetched:", friends);
 
     const friendIds = friends.map((friend) => friend.relacao_id);
 
@@ -134,7 +79,7 @@ exports.getFriendSuggestions = async (req, res) => {
       limit: 10,
     });
 
-    console.log("Suggestions fetched:", suggestions);
+    //console.log("Suggestions fetched:", suggestions);
 
     res.json(suggestions);
   } catch (error) {
@@ -164,5 +109,77 @@ exports.getPendingFriendRequests = async (req, res) => {
   } catch (error) {
     console.error("Error fetching pending friend requests:", error);
     res.status(500).json({ message: "Error fetching pending friend requests" });
+  }
+};
+
+/// Fetch all friends
+exports.getAllFriends = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const friends = await Relacionamento.findAll({
+      where: {
+        [Sequelize.Op.or]: [
+          { user_id: userId, status: "accepted" },
+          { relacao_id: userId, status: "accepted" },
+        ],
+      },
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["id", "nome", "profile_picture"],
+        },
+        {
+          model: User,
+          as: "relacao",
+          attributes: ["id", "nome", "profile_picture"],
+        },
+      ],
+    });
+
+    const friendList = friends.map((friend) => {
+      if (friend.user_id == userId) {
+        return {
+          id: friend.relacao.id,
+          nome: friend.relacao.nome,
+          profile_picture: friend.relacao.profile_picture,
+        };
+      } else {
+        return {
+          id: friend.user.id,
+          nome: friend.user.nome,
+          profile_picture: friend.user.profile_picture,
+        };
+      }
+    });
+
+    res.json(friendList);
+  } catch (error) {
+    console.error("Error fetching friends:", error);
+    res.status(500).json({ message: "Error fetching friends" });
+  }
+};
+
+// Delete a friendship
+exports.deleteFriendship = async (req, res) => {
+  const { userId, friendId } = req.params;
+  try {
+    const result = await Relacionamento.destroy({
+      where: {
+        [Sequelize.Op.or]: [
+          { user_id: userId, relacao_id: friendId },
+          { user_id: friendId, relacao_id: userId },
+        ],
+      },
+    });
+
+    if (result > 0) {
+      res.status(200).json({ message: "Friendship deleted successfully" });
+    } else {
+      res.status(404).json({ message: "Friendship not found" });
+    }
+  } catch (error) {
+    console.error("Error deleting friendship:", error);
+    res.status(500).json({ message: "Error deleting friendship" });
   }
 };

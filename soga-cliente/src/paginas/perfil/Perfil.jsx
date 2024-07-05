@@ -78,8 +78,6 @@ function Perfil() {
     );
   }
 
-  console.log("Profile:", userData);
-
   return (
     <div className={style.profile}>
       <div className={style.images}>

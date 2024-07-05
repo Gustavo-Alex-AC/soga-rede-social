@@ -1,10 +1,14 @@
+import { acceptRequest, deleteRequest } from "../../services/amizadesData";
 import style from "./Pedido.module.css";
-function Pedido({ pedido, handleAcceptRequest, handleDeleteRequest }) {
-  function handleConfirmar() {
-    handleAcceptRequest(pedido.id);
+function Pedido({ pedido, queryClient }) {
+  async function handleConfirmar() {
+    await acceptRequest(pedido.id);
+    queryClient.invalidateQueries("relacionamentos/accept");
   }
-  function handleEliminar() {
-    handleDeleteRequest(pedido.id);
+
+  async function handleEliminar() {
+    await deleteRequest(pedido.id);
+    queryClient.invalidateQueries("relacionamentos/delete");
   }
 
   return (

@@ -1,4 +1,3 @@
-import { deleteRequest, sendRequest } from "../../services/amizadesData";
 import Spinner from "../../ui/Spinner";
 import Erro from "../../ui/Erro";
 import useSugestoes from "../../hooks/useSugestoes";
@@ -6,18 +5,6 @@ import Sugestao from "./Sugestao";
 
 function Sugestoes() {
   const { isError, isLoading, error, sugestoes, queryClient } = useSugestoes();
-
-  console.log("sugestoes:", sugestoes);
-
-  const handleSendRequest = async (requestId, relacaoId) => {
-    await sendRequest(requestId, relacaoId);
-    queryClient.invalidateQueries("relacionamentos");
-  };
-
-  const handleDeleteRequest = async (requestId) => {
-    await deleteRequest(requestId);
-    queryClient.invalidateQueries("relacionamentos");
-  };
 
   if (isLoading) {
     return <Spinner />;
@@ -39,8 +26,7 @@ function Sugestoes() {
           <Sugestao
             data={sugestao}
             key={sugestao.id}
-            handleSendRequest={handleSendRequest}
-            handleDeleteRequest={handleDeleteRequest}
+            queryClient={queryClient}
           />
         ))
       ) : (

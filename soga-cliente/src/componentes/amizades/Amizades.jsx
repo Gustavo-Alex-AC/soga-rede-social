@@ -12,26 +12,12 @@ const Amizades = () => {
   const { user } = useContext(GlobalContext);
   const { pedidos, queryClient } = usePedidos();
   const [amizades, setAmizades] = useState([]);
-  const [suggestions, setSuggestions] = useState([]);
-  const [pedidoamizades, setPendingRequests] = useState([]);
-
-  // async function fetchFriends(user) {
-  //   try {
-  //     const response = await axios.get(`${BASEURL}/friends/${user}`);
-  //     return response.data;
-  //   } catch (error) {
-  //     console.error("Error fetching friends:", error);
-  //   }
-  // }
-
-  console.log(pedidos);
 
   useEffect(() => {
     const fetchFriends = async () => {
       try {
         const response = await axios.get(`${BASEURL}/friends/${user.id}`);
         setAmizades(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error("Error fetching friends:", error);
       }
@@ -39,43 +25,6 @@ const Amizades = () => {
 
     fetchFriends();
   }, [user.id]);
-
-  const handleSendRequest = async (relacaoId) => {
-    try {
-      await axios.post(`${BASEURL}/send`, {
-        userId: user.id,
-        relacaoId,
-      });
-      // Optionally update UI or fetch new data
-    } catch (error) {
-      console.error("Error sending friend request:", error);
-    }
-  };
-
-  const handleAcceptRequest = async (id) => {
-    try {
-      await axios.put(`${BASEURL}/accept/${id}`);
-      // Optionally update UI or fetch new data
-    } catch (error) {
-      console.error("Error accepting friend request:", error);
-    }
-  };
-
-  const handleDeleteRequest = async (id) => {
-    try {
-      await axios.delete(`${BASEURL}/delete/${id}`);
-      // Optionally update UI or fetch new data
-    } catch (error) {
-      console.error("Error deleting friend request:", error);
-    }
-  };
-
-  // if (isLoadingFriends) return <Spinner />;
-  // if (isErrorFriends) {
-  //   return (
-  //     <div>Error loading data: {<Erro mensagem={errorFriends?.message} />}</div>
-  //   );
-  // }
 
   return (
     <div className={style.container}>
@@ -86,8 +35,8 @@ const Amizades = () => {
             amizades?.map((friend) => (
               <Amizade
                 data={friend}
-                handleDeleteRequest={handleDeleteRequest}
                 key={friend.id}
+                queryClient={queryClient}
               />
             ))
           ) : (
@@ -100,14 +49,7 @@ const Amizades = () => {
         <h3>Pedidos de amizades</h3>
         <div className={style.containerUser}>
           {pedidos?.length ? (
-            pedidos?.map((pedido) => (
-              <Amizade
-                data={pedido}
-                handleDeleteRequest={handleDeleteRequest}
-                handleAcceptRequest={handleAcceptRequest}
-                key={pedido.id}
-              />
-            ))
+            pedidos?.map((pedido) => <Amizade data={pedido} key={pedido.id} />)
           ) : (
             <p style={{ marginTop: "10px", color: "gray" }}>
               Nenhum pedido de amizade...
@@ -120,12 +62,3 @@ const Amizades = () => {
 };
 
 export default Amizades;
-
-// const fetchSuggestions = async () => {
-//   try {
-//     const response = await axios.get(`${BASEURL}/suggestions/${user.id}`);
-//     setSuggestions(response.data);
-//   } catch (error) {
-//     console.error("Error fetching suggestions:", error);
-//   }
-// };

@@ -38,11 +38,11 @@ export const acceptRequest = async (requestId) => {
   }
 };
 
-export const sendRequest = async (requestId, relacaoId) => {
+export const sendRequest = async (user_id, relacao_id) => {
   try {
     const res = await axios.post(`${BASEURL}/send`, {
-      userId: requestId,
-      relacaoId,
+      user_id,
+      relacao_id,
     });
     return res.data;
   } catch (error) {
@@ -56,5 +56,15 @@ export const deleteRequest = async (requestId) => {
     return res.data;
   } catch (error) {
     console.error("Error deleting request:", error);
+  }
+};
+export const deletefriend = async (userId, friendId) => {
+  try {
+    const res = await axios.delete(
+      `${BASEURL}/deletefriend/${userId}/${friendId}`
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Error deleting FriendShip:", error);
   }
 };

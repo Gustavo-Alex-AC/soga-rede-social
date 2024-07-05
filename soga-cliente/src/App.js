@@ -21,6 +21,8 @@ import Notificacao from "./componentes/notificacao/Notificacao.jsx";
 import Noticias from "./componentes/noticias/Noticias.jsx";
 import BoasVindas from "./paginas/boasvindas/BoasVindas.jsx";
 import Atualizar from "./paginas/atualizarPerfil/Atualizar.jsx";
+import OutroPerfil from "./paginas/perfil/OutroPerfil.jsx";
+import { SelectedChatProvider } from "./context/SelectedChats.js";
 
 //setting up react query
 const queryClient = new QueryClient({
@@ -55,6 +57,14 @@ function App() {
           element: (
             <RotaProtegida>
               <Perfil />
+            </RotaProtegida>
+          ),
+        },
+        {
+          path: "/perfilde/:userId",
+          element: (
+            <RotaProtegida>
+              <OutroPerfil />
             </RotaProtegida>
           ),
         },
@@ -129,12 +139,14 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <GlobalProvider>
-        <UserDataProvider>
-          <RouterProvider router={router} />
-          <ToastContainer />
-        </UserDataProvider>
-      </GlobalProvider>
+      <SelectedChatProvider>
+        <GlobalProvider>
+          <UserDataProvider>
+            <RouterProvider router={router} />
+            <ToastContainer />
+          </UserDataProvider>
+        </GlobalProvider>
+      </SelectedChatProvider>
     </QueryClientProvider>
   );
 }

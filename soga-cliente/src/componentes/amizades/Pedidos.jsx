@@ -39,6 +39,7 @@ function Pedidos() {
             key={pedido.id}
             handleAcceptRequest={handleAcceptRequest}
             handleDeleteRequest={handleDeleteRequest}
+            queryClient={queryClient}
           />
         ))
       ) : (
