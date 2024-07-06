@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import GlobalContext from "../../context/GlobalContext";
 import { deleteUserAccount } from "../../services/userData";
 import { toast } from "react-toastify";
-import styles from "./Definicoes.module.css";
+import styles from "./DeleteAccount.module.css";
 import { useNavigate } from "react-router";
 
 const DeleteAccount = () => {
