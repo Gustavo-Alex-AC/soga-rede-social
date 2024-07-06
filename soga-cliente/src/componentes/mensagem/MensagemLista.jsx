@@ -3,7 +3,7 @@ import styles from "./MensagemLista.module.css";
 import axios from "axios";
 import GlobalContext from "../../context/GlobalContext";
 
-const MessageList = ({ onSelectChat, onNewChat }) => {
+const MensagemLista = ({ onSelectChat, onNewChat }) => {
   const { user } = useContext(GlobalContext);
   const [chats, setChats] = useState([]);
 
@@ -49,4 +49,4 @@ const MessageList = ({ onSelectChat, onNewChat }) => {
   );
 };
 
-export default MessageList;
+export default MensagemLista;

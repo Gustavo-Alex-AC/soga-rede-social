@@ -16,7 +16,7 @@ const NewChat = ({ setIsNewChat, setSelectedChat }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`${BASEURL}/users`);
+        const response = await axios.get(`${BASEURL}/users`); // Endpoint to get all users
         setUsers(response.data);
       } catch (error) {
         console.error("Failed to fetch users", error);
@@ -28,14 +28,16 @@ const NewChat = ({ setIsNewChat, setSelectedChat }) => {
   const handleSendMessage = async () => {
     try {
       const response = await axios.post(`${BASEURL}/mensagens/send`, {
-        sender_id: user.id,
+        sender_id: user.id, // Replace with the actual sender ID
         receiver_id: selectedUser.id,
         content: message,
       });
 
       const newChat = response.data;
+
       setSelectedChat(newChat);
-      setIsNewChat(false); // Close the NewChat form
+      //setChats((prevChats) => [...prevChats, newChat]);
+      setIsNewChat(false);
     } catch (error) {
       console.error("Failed to send message", error);
     }

@@ -48,7 +48,7 @@ function Registrar() {
             </div>
 
             <div className={style.inputBox}>
-              <label for="email">Email ou numero de telefone</label>
+              <label for="email">Email</label>
               <input
                 type="email"
                 value={email}

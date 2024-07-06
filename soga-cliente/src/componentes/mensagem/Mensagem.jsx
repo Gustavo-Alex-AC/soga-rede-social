@@ -35,7 +35,7 @@ const Mensagem = () => {
         ) : selectedChat ? (
           <ChatBox selectedChat={selectedChat} />
         ) : (
-          <p>Select a chat to start messaging</p>
+          ""
         )}
       </div>
     </div>

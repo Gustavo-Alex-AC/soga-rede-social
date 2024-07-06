@@ -2,7 +2,7 @@ import style from "./Login.module.css";
 
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import GlobalContext from "../../context/GlobalContext";
 
@@ -62,11 +62,11 @@ function Login() {
             </div>
 
             <div className={style.remember}>
-              <label>
+              {/* <label>
                 <input type="checkbox" />
                 Lembrar de mim
               </label>
-              <Link href="#">Esqueceu a palavra-passe?</Link>
+              <Link href="#">Esqueceu a palavra-passe?</Link> */}
             </div>
             <button className={style.btnEntrar} type="submit">
               Entrar

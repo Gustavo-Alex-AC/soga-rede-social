@@ -24,3 +24,12 @@ export const fetchUsers = async () => {
     return null;
   }
 };
+
+export const deleteUserAccount = async (id) => {
+  try {
+    await axios.delete(`${BASEURL}/${id}`);
+  } catch (erro) {
+    console.error("Erro eliminando os usuario", erro);
+    return null;
+  }
+};
