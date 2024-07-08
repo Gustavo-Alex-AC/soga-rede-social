@@ -14,8 +14,8 @@ function useSugestoes() {
     isError,
     error,
   } = useQuery({
-    queryKey: ["relacionamentos/suggestions", user.id],
-    queryFn: () => fetchSuggestionRequests(user.id),
+    queryKey: ["relacionamentos/suggestions", user?.id],
+    queryFn: () => fetchSuggestionRequests(user?.id),
     onError: (error) => {
       toast.error(`Error fetching sugestoes: ${error.message}`);
       console.error("Error details:", error);

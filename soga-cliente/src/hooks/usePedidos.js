@@ -14,8 +14,8 @@ function usePedidos() {
     isError,
     error,
   } = useQuery({
-    queryKey: ["relacionamentos", user.id], // Dynamic query key with post.id
-    queryFn: () => fetchPendingRequests(user.id), // Pass post.id to fetchComentarios
+    queryKey: ["relacionamentos", user?.id], // Dynamic query key with post.id
+    queryFn: () => fetchPendingRequests(user?.id), // Pass post.id to fetchComentarios
     onError: (error) => {
       toast.error(`Error fetching comments: ${error.message}`);
       console.error("Error details:", error);

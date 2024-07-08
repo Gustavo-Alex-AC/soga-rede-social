@@ -13,7 +13,7 @@ function Contactos() {
   useEffect(() => {
     const fetchFriends = async () => {
       try {
-        const response = await axios.get(`${BASEURL}/friends/${user.id}`);
+        const response = await axios.get(`${BASEURL}/friends/${user?.id}`);
         setAmizades(response.data);
         console.log(response.data);
       } catch (error) {
