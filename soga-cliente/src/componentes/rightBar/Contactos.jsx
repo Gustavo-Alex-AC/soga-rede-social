@@ -21,7 +21,7 @@ function Contactos() {
       }
     };
     fetchFriends();
-  }, [user.id]);
+  }, [user?.id]);
 
   return (
     <>
